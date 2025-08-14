@@ -1,5 +1,6 @@
 import Image from "next/image";
 import styles from "./page.module.css";
+import "./globals.css";
 
 export default function Home() {
   return (
@@ -13,8 +14,8 @@ export default function Home() {
           height={38}
           priority
         />
-        <ol>
-          <li>
+        <ol className="bg-amber-500 ">
+          <li className="text-4xl">
             Get started by editing <code>src/app/page.tsx</code>.
           </li>
           <li>Save and see your changes instantly.</li>
