@@ -1,0 +1,175 @@
+"use client";
+import React from "react";
+import Link from "next/link";
+import { useState } from "react";
+
+const cards = [
+  {
+    id: 1,
+    img: "/sample.png",
+    title: "The Sarasva Capital",
+    text: "We are a community of creators who make really cool things for new tech to help them succeed.",
+  },
+  {
+    id: 2,
+    img: "/sample2.png",
+    title: "The Sarasva Capital",
+    text: "We are a community of creators who make really cool things for new tech to help them succeed.",
+  },
+  {
+    id: 3,
+    img: "/sample3.png",
+    title: "The Sarasva Capital",
+    text: "We are a community of creators who make really cool things for new tech to help them succeed.",
+  },
+  {
+    id: 4,
+    img: "/sample.png",
+    title: "The Sarasva Capital",
+    text: "We are a community of creators who make really cool things for new tech to help them succeed.",
+  },
+  {
+    id: 5,
+    img: "/sample.png",
+    title: "The Sarasva Capital",
+    text: "We are a community of creators who make really cool things for new tech to help them succeed.",
+  },
+  {
+    id: 6,
+    img: "/sample.png",
+    title: "The Sarasva Capital",
+    text: "We are a community of creators who make really cool things for new tech to help them succeed.",
+  },
+];
+const filters = ["Articles", "White Papers", "Case Studies", "Infographics"];
+const page = () => {
+  const [active, setActive] = useState("");
+  const [layout, setLayout] = useState("mobile");
+  return (
+    <div className="mt-20 mb-20 w-full">
+      <div className="flex w-full justify-around gap-8 text-[16px]">
+        {/* Categories */}
+        <div className="flex flex-col gap-6 p-2">
+          <div className="font-normal text-[#332C2C]/60">Categories</div>
+          <div className="flex flex-col gap-6 font-medium">
+            <Link href="/components-detail">AI and Machine Learning</Link>
+            <Link href="/components-detail">Product Development</Link>
+            <Link href="/components-detail">Shopping & Lifestyle</Link>
+            <Link href="/components-detail">Ecommerce</Link>
+            <Link href="/components-detail">Cloud and Infrastructure</Link>
+          </div>
+        </div>
+
+        {/* Screens */}
+        <div className="flex flex-col gap-6 p-2">
+          <div className="font-normal text-[#332C2C]/60">Screens</div>
+          <div className="flex flex-col gap-6 font-medium">
+            <Link href="#">Shopping & Lifestyle</Link>
+            <Link href="#">Product Development</Link>
+            <Link href="#">AI and Machine Learning</Link>
+            <Link href="#">Ecommerce</Link>
+
+            <Link href="#">Cloud and Infrastructure</Link>
+          </div>
+        </div>
+
+        {/* UI Elements */}
+        <div className="flex flex-col gap-6 p-2">
+          <div className="font-normal text-[#332C2C]/60">UI Elements</div>
+          <div className="flex flex-col gap-6 font-medium">
+            <Link href="#">Cloud and Infrastructure</Link>
+            <Link href="#">AI and Machine Learning</Link>
+            <Link href="#">Shopping & Lifestyle</Link>
+            <Link href="#">Product Development</Link>
+            <Link href="#">Ecommerce</Link>
+          </div>
+        </div>
+
+        {/* Components */}
+        <div className="flex flex-col gap-6 p-2">
+          <div className="font-normal text-[#332C2C]/60">Components</div>
+          <div className="flex flex-col gap-6 font-medium">
+            <Link href="#">AI and Machine Learning</Link>
+            <Link href="#">Cloud and Infrastructure</Link>
+            <Link href="#">Shopping & Lifestyle</Link>
+            <Link href="#">Product Development</Link>
+            <Link href="#">Ecommerce</Link>
+          </div>
+        </div>
+      </div>
+      {/* filter bar */}
+      <div className="mt-20 flex items-center justify-between px-20">
+        {/* filter bar */}
+        <div className="flex items-center gap-5">
+          {filters.map((filter) => (
+            <button
+              key={filter}
+              onClick={() => setActive(filter)}
+              className={`rounded-lg px-[14px] py-[10px] text-[14px] font-normal transition ${
+                active === filter ? "bg-gray-100 text-black" : "text-gray-600"
+              }`}
+            >
+              {filter}
+            </button>
+          ))}
+        </div>
+
+        {/* Toggle Button */}
+        <div className="flex">
+          <div className="flex overflow-hidden rounded-[6px] border border-[#1A1A1A33]/60 p-1 text-[14px] font-normal">
+            <button
+              onClick={() => setLayout("web")}
+              className={`px-4 py-2 font-medium transition ${
+                layout === "web"
+                  ? "rounded-[4px] bg-[#1A1A1A08] text-black"
+                  : "bg-white"
+              }`}
+            >
+              Web
+            </button>
+            <button
+              onClick={() => setLayout("mobile")}
+              className={`px-4 py-2 font-medium transition ${
+                layout === "mobile"
+                  ? "rounded-[4px] bg-[#1A1A1A08] text-black"
+                  : "bg-white"
+              }`}
+            >
+              Mobile
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {/* Grid */}
+      <div className="mx-auto mt-10 w-full max-w-7xl">
+        <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-3">
+          {cards.map((card) => (
+            <div key={card.id} className="flex flex-col">
+              {/* Card image */}
+              <div className="overflow-hidden rounded-[8px] border border-[#FBFBFB] bg-white">
+                {card.img && (
+                  <img
+                    src={card.img}
+                    alt={card.title}
+                    className="h-[400px] max-h-full w-[400px] max-w-full object-cover"
+                  />
+                )}
+              </div>
+              <div className="mt-3 px-1">
+                <h3 className="text-[14px] font-medium text-[#1A1A1A]">
+                  {card.title}
+                </h3>
+                <p className="mt-1 text-[12px] font-normal text-[#1A1A1A]/70">
+                  {card.text}
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default page;

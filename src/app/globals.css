@@ -110,11 +110,38 @@
   --sidebar-ring: oklch(0.551 0.027 264.364);
 }
 
-@layer base {
-  * {
-    @apply border-border outline-ring/50;
+@layer utilities {
+  @keyframes slideInFromRight {
+    from {
+      transform: translateX(100%);
+    }
+    to {
+      transform: translateX(0);
+    }
   }
-  body {
-    @apply bg-background text-foreground;
+
+  @keyframes slideOutToRight {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(100%);
+    }
   }
+
+  .animate-slideIn {
+    animation: slideInFromRight 0.3s ease-out forwards;
+  }
+
+  .animate-slideOut {
+    animation: slideOutToRight 0.3s ease-in forwards;
+  }
+}
+
+:root {
+  --text-primary: #1a1a1ae5;
+}
+
+body {
+  color: var(--text-primary);
 }

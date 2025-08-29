@@ -42,7 +42,7 @@ const cards = [
   },
 ];
 
-const filters = ["Articles", "White Papers", "Case Studies", "Most Viewed"];
+const filters = ["Articles", "White Papers", "Case Studies", "Infographics"];
 
 export default function Home() {
   const [active, setActive] = useState("");
@@ -50,57 +50,6 @@ export default function Home() {
 
   return (
     <div className="mt-20 w-full">
-      {/* Categories + Sections */}
-      <div className="flex w-full justify-around gap-8 text-[16px]">
-        {/* Categories */}
-        <div className="flex flex-col gap-6 p-2">
-          <div className="font-normal text-[#332C2C]/60">Categories</div>
-          <div className="flex flex-col gap-6 font-medium">
-            <Link href="/portfolio-detail">AI and Machine Learning</Link>
-            <Link href="/portfolio-detail">Product Development</Link>
-            <Link href="/portfolio-detail">Shopping & Lifestyle</Link>
-            <Link href="/portfolio-detail">Ecommerce</Link>
-            <Link href="/portfolio-detail">Cloud and Infrastructure</Link>
-          </div>
-        </div>
-
-        {/* Screens */}
-        <div className="flex flex-col gap-6 p-2">
-          <div className="font-normal text-[#332C2C]/60">Screens</div>
-          <div className="flex flex-col gap-6 font-medium">
-            <Link href="#">Shopping & Lifestyle</Link>
-            <Link href="#">Product Development</Link>
-            <Link href="#">AI and Machine Learning</Link>
-            <Link href="#">Ecommerce</Link>
-            <Link href="#">Cloud and Infrastructure</Link>
-          </div>
-        </div>
-
-        {/* UI Elements */}
-        <div className="flex flex-col gap-6 p-2">
-          <div className="font-normal text-[#332C2C]/60">UI Elements</div>
-          <div className="flex flex-col gap-6 font-medium">
-            <Link href="#">Cloud and Infrastructure</Link>
-            <Link href="#">AI and Machine Learning</Link>
-            <Link href="#">Shopping & Lifestyle</Link>
-            <Link href="#">Product Development</Link>
-            <Link href="#">Ecommerce</Link>
-          </div>
-        </div>
-
-        {/* Components */}
-        <div className="flex flex-col gap-6 p-2">
-          <div className="font-normal text-[#332C2C]/60">Components</div>
-          <div className="flex flex-col gap-6 font-medium">
-            <Link href="#">AI and Machine Learning</Link>
-            <Link href="#">Cloud and Infrastructure</Link>
-            <Link href="#">Shopping & Lifestyle</Link>
-            <Link href="#">Product Development</Link>
-            <Link href="#">Ecommerce</Link>
-          </div>
-        </div>
-      </div>
-
       <div className="mt-20 flex items-center justify-between px-20">
         {/* filter bar */}
         <div className="flex items-center gap-5">
@@ -179,7 +128,7 @@ export default function Home() {
       ) : (
         <>
           {/* Grid Mobile*/}
-          <div className="mx-auto mt-10 max-w-7xl">
+          <div className="mx-auto mt-10 mb-20 max-w-7xl">
             <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-3">
               {cards.map((card) => (
                 <div key={card.id} className="flex flex-col items-center">
@@ -191,7 +140,7 @@ export default function Home() {
                           src={card.img}
                           alt="Card Image"
                           width={400}
-                          height={574}
+                          height={500}
                           className="rounded-lg"
                         />
                       </div>
