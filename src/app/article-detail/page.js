@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import Link from "next/link";
+import Image from "next/image";
 import { useState } from "react";
 
 const cards = [
@@ -69,11 +69,14 @@ const Page = () => {
           {cards.map((card) => (
             <div key={card.id} className="flex flex-col">
               {/* Card image */}
+
               <div className="overflow-hidden rounded-[8px] border border-[#FBFBFB] bg-white">
                 {card.img && (
-                  <img
+                  <Image
                     src={card.img}
                     alt={card.title}
+                    width={400} // set a width
+                    height={224} // set a height (to match h-56 ≈ 224px)
                     className="h-56 w-full object-cover"
                   />
                 )}

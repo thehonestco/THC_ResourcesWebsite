@@ -1,6 +1,5 @@
 "use client";
 import React from "react";
-
 import Link from "next/link";
 import { useState } from "react";
 
@@ -44,7 +43,7 @@ const cards = [
 ];
 const filters = ["Articles", "White Papers", "Case Studies", "Infographics"];
 
-const page = () => {
+const Page = () => {
   const [active, setActive] = useState("");
   return (
     <div className="mt-20 mb-20 w-full">
@@ -144,4 +143,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

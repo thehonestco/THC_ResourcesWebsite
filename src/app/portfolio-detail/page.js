@@ -1,5 +1,4 @@
 "use client";
-import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
 
@@ -46,7 +45,7 @@ const filters = ["Articles", "White Papers", "Case Studies", "Infographics"];
 
 export default function Home() {
   const [active, setActive] = useState("");
-  const [layout, setLayout] = useState("mobile"); // default to mobile
+  const [layout, setLayout] = useState("mobile");
 
   return (
     <div className="mt-20 w-full">

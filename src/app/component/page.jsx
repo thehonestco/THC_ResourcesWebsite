@@ -42,7 +42,7 @@ const cards = [
   },
 ];
 const filters = ["Articles", "White Papers", "Case Studies", "Infographics"];
-const page = () => {
+const Page = () => {
   const [active, setActive] = useState("");
   const [layout, setLayout] = useState("mobile");
   return (
@@ -172,4 +172,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;
