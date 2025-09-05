@@ -48,7 +48,7 @@ export default function Navbar() {
   ];
 
   return (
-    <nav className="text-Primary mt-7 px-4 lg:px-[80px]">
+    <nav className="text-Primary main-container mt-[18px] md:mt-[28px]">
       <div className="flex w-full items-center justify-between gap-6">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-x-2 text-[22.5px]">
@@ -58,7 +58,7 @@ export default function Navbar() {
         </Link>
 
         {/* Nav Links */}
-        <div className="flex items-center gap-x-[22px] text-center">
+        <div className="hidden items-center gap-x-[22px] text-center md:flex">
           {links.map((link) => (
             <Link
               key={link.href}
@@ -74,27 +74,41 @@ export default function Navbar() {
             </Link>
           ))}
         </div>
-
         {/* Search */}
         <Dialog>
-          <DialogTrigger asChild>
-            <div className="relative flex w-[285px] cursor-pointer">
-              <Input
-                type="text"
-                placeholder="Search.."
-                className="w-full cursor-pointer rounded-[6px] border-[0.5px] border-[rgba(26,26,26,0.5)] py-2 pl-8 text-[14px] font-normal text-black placeholder-gray-400"
-                readOnly
-              />
-              <div className="pointer-events-none absolute top-1/2 left-2 -translate-y-1/2 transform">
+          <div className="block md:hidden">
+            <DialogTrigger asChild>
+              <div className="cursor-pointer p-1">
                 <Image
                   src="/search.png"
                   alt="Search Icon"
-                  width={20}
-                  height={20}
+                  width={21}
+                  height={21}
                 />
               </div>
-            </div>
-          </DialogTrigger>
+            </DialogTrigger>
+          </div>
+
+          <div className="hidden md:block">
+            <DialogTrigger asChild>
+              <div className="relative flex cursor-pointer">
+                <Input
+                  type="text"
+                  placeholder="Search.."
+                  className="w-full cursor-pointer rounded-[6px] border-[0.5px] border-[rgba(26,26,26,0.5)] py-2 pl-8 text-[14px] font-normal text-black placeholder-gray-400"
+                  readOnly
+                />
+                <div className="pointer-events-none absolute top-1/2 left-2 -translate-y-1/2 transform">
+                  <Image
+                    src="/search.png"
+                    alt="Search Icon"
+                    width={20}
+                    height={20}
+                  />
+                </div>
+              </div>
+            </DialogTrigger>
+          </div>
 
           <DialogContent
             className={cn(
@@ -195,7 +209,7 @@ export default function Navbar() {
       </div>
 
       <div
-        className="mt-7 h-[1px] w-full opacity-50"
+        className="mt-[16px] h-[1px] w-full opacity-50"
         style={{
           background:
             "linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(0,0,0,0.6) 6.73%, rgba(0,0,0,0.6) 92.79%, rgba(255,255,255,0) 100%)",

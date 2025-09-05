@@ -46,8 +46,8 @@ const filters = ["Articles", "White Papers", "Case Studies", "Infographics"];
 const Page = () => {
   const [active, setActive] = useState("");
   return (
-    <div className="mt-20 mb-20 w-full">
-      <div className="flex w-full justify-around gap-8 text-[16px]">
+    <div className="main-container w-full md:mt-20">
+      <div className="hidden w-full justify-between gap-8 text-[16px] md:flex">
         {/* UI Elements (moved here instead of Categories) */}
         <div className="flex flex-col gap-6 p-2">
           <div className="font-normal text-[#332C2C]/60">UI Elements</div>
@@ -97,23 +97,24 @@ const Page = () => {
         </div>
       </div>
       {/* filter bar */}
-      <div className="mt-20 ml-20 flex items-center justify-start gap-5">
-        {filters.map((filter) => (
-          <button
-            key={filter}
-            onClick={() => setActive(filter)}
-            className={`rounded-lg px-[14px] py-[10px] text-[14px] font-normal transition ${
-              active === filter
-                ? "bg-gray-100 text-black"
-                : "text-gray-600 hover:text-black"
-            }`}
-          >
-            {filter}
-          </button>
-        ))}
+      <div className="scrollbar-hide mt-5 flex w-full flex-1 items-center overflow-x-auto">
+        <div className="flex gap-3">
+          {filters.map((filter) => (
+            <button
+              key={filter}
+              onClick={() => setActive(filter)}
+              className={`rounded-lg px-[14px] py-[10px] text-[12px] font-normal whitespace-nowrap transition md:text-[14px] ${
+                active === filter ? "bg-gray-100 text-black" : "text-gray-600"
+              }`}
+            >
+              {filter}
+            </button>
+          ))}
+        </div>
       </div>
+
       {/* Grid Section */}
-      <div className="mx-auto mt-10 max-w-7xl px-4">
+      <div className="mx-auto mt-10 max-w-7xl">
         <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-3">
           {cards.map((card) => (
             <div
@@ -127,7 +128,7 @@ const Page = () => {
                   className="h-56 w-full rounded-[6px] object-cover"
                 />
               )}
-              <div className="p-4">
+              <div className="p-1 md:p-[10px]">
                 <h3 className="text-[14px] font-medium text-[#1A1A1A]">
                   {card.title}
                 </h3>

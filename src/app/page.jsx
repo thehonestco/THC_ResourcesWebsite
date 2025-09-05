@@ -46,14 +46,21 @@ const filters = ["Articles", "White Papers", "Case Studies", "Most Viewed"];
 
 export default function Home() {
   const [active, setActive] = useState("");
-  const [layout, setLayout] = useState("mobile"); // default to mobile
+  const [layout, setLayout] = useState("mobile");
+  const [open, setOpen] = useState(false);
+  const [selected, setSelected] = useState("Portfolio"); // default label
+
+  const handleSelect = (name) => {
+    setSelected(name);
+    setOpen(false);
+  };
 
   return (
-    <div className="mt-20 w-full">
+    <div className="main-container w-full md:mt-20">
       {/* Categories + Sections */}
-      <div className="flex w-full justify-around gap-8 text-[16px]">
+      <div className="hidden w-full justify-between gap-8 text-[16px] md:flex">
         {/* Categories */}
-        <div className="flex flex-col gap-6 p-2">
+        <div className="flex flex-col gap-6">
           <div className="font-normal text-[#332C2C]/60">Categories</div>
           <div className="flex flex-col gap-6 font-medium">
             <Link href="/portfolio-detail">AI and Machine Learning</Link>
@@ -65,7 +72,7 @@ export default function Home() {
         </div>
 
         {/* Screens */}
-        <div className="flex flex-col gap-6 p-2">
+        <div className="flex flex-col gap-6">
           <div className="font-normal text-[#332C2C]/60">Screens</div>
           <div className="flex flex-col gap-6 font-medium">
             <Link href="#">Shopping & Lifestyle</Link>
@@ -77,7 +84,7 @@ export default function Home() {
         </div>
 
         {/* UI Elements */}
-        <div className="flex flex-col gap-6 p-2">
+        <div className="flex flex-col gap-6">
           <div className="font-normal text-[#332C2C]/60">UI Elements</div>
           <div className="flex flex-col gap-6 font-medium">
             <Link href="#">Cloud and Infrastructure</Link>
@@ -89,7 +96,7 @@ export default function Home() {
         </div>
 
         {/* Components */}
-        <div className="flex flex-col gap-6 p-2">
+        <div className="flex flex-col gap-6">
           <div className="font-normal text-[#332C2C]/60">Components</div>
           <div className="flex flex-col gap-6 font-medium">
             <Link href="#">AI and Machine Learning</Link>
@@ -101,55 +108,164 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="mt-20 flex items-center justify-between px-20">
-        {/* filter bar */}
-        <div className="flex items-center gap-5">
-          {filters.map((filter) => (
-            <button
-              key={filter}
-              onClick={() => setActive(filter)}
-              className={`rounded-lg px-[14px] py-[10px] text-[14px] font-normal transition ${
-                active === filter ? "bg-gray-100 text-black" : "text-gray-600"
-              }`}
+      <div className="relative mt-[24px] block md:hidden">
+        {/* Button with current selection */}
+        <button
+          onClick={() => setOpen(!open)}
+          className="w-auto bg-white text-[16px] font-medium"
+        >
+          {selected} ▾
+        </button>
+
+        {/* Dropdown menu */}
+        {open && (
+          <div className="absolute mt-2 w-[160px] rounded-md border border-gray-200 bg-white shadow-md">
+            <Link
+              href="/"
+              className="block px-3 py-2 hover:bg-gray-100"
+              onClick={() => handleSelect("Portfolio")}
             >
-              {filter}
-            </button>
-          ))}
+              Portfolio
+            </Link>
+            <Link
+              href="/tutorials"
+              className="block px-3 py-2 hover:bg-gray-100"
+              onClick={() => handleSelect("Tutorials")}
+            >
+              Tutorials
+            </Link>
+            <Link
+              href="/articles"
+              className="block px-3 py-2 hover:bg-gray-100"
+              onClick={() => handleSelect("Articles")}
+            >
+              Articles
+            </Link>
+            <Link
+              href="/component"
+              className="block px-3 py-2 hover:bg-gray-100"
+              onClick={() => handleSelect("Components")}
+            >
+              Components
+            </Link>
+          </div>
+        )}
+      </div>
+
+      <div className="mt-[30px] flex flex-col gap-5 md:mt-20 md:flex-row md:items-center md:justify-between">
+        <div className="flex w-full items-center md:hidden md:px-4">
+          {/* Toggle Button */}
+          <div className="flex-shrink-0">
+            <div className="flex gap-[5px] overflow-hidden rounded-[82px] border-[0.5px] border-[#1A1A1A33]/60 p-1 font-normal">
+              {/* Web Button */}
+              <button
+                onClick={() => setLayout("web")}
+                className={`flex items-center justify-center px-1 py-1 font-medium transition ${
+                  layout === "web"
+                    ? "rounded-[59px] bg-[#1A1A1A08] text-black"
+                    : "bg-white"
+                }`}
+              >
+                <Image
+                  src="/laptop-icon.png"
+                  alt="Web Icon"
+                  width={20}
+                  height={20}
+                />
+              </button>
+
+              {/* Mobile Button */}
+              <button
+                onClick={() => setLayout("mobile")}
+                className={`flex items-center justify-center px-1 py-1 font-medium transition ${
+                  layout === "mobile"
+                    ? "rounded-[59px] bg-[#1A1A1A08] text-black"
+                    : "bg-white"
+                }`}
+              >
+                <Image
+                  src="/mobile-icon.png"
+                  alt="Mobile Icon"
+                  width={20}
+                  height={20}
+                />
+              </button>
+            </div>
+          </div>
+
+          <div className="mr-[10px] ml-[15px] h-6 w-px flex-shrink-0 border-[0.5px] bg-gray-300"></div>
+
+          {/* Filter Bar */}
+          <div className="scrollbar-hide flex w-full flex-1 items-center overflow-x-auto">
+            <div className="flex gap-3">
+              {filters.map((filter) => (
+                <button
+                  key={filter}
+                  onClick={() => setActive(filter)}
+                  className={`rounded-lg px-[14px] py-[10px] text-[12px] font-normal whitespace-nowrap transition md:text-[14px] ${
+                    active === filter
+                      ? "bg-gray-100 text-black"
+                      : "text-gray-600"
+                  }`}
+                >
+                  {filter}
+                </button>
+              ))}
+            </div>
+          </div>
         </div>
 
-        {/* Toggle Button */}
-        <div className="flex">
-          <div className="flex overflow-hidden rounded-[6px] border border-[#1A1A1A33]/60 p-1 text-[14px] font-normal">
-            <button
-              onClick={() => setLayout("web")}
-              className={`px-4 py-2 font-medium transition ${
-                layout === "web"
-                  ? "rounded-[4px] bg-[#1A1A1A08] text-black"
-                  : "bg-white"
-              }`}
-            >
-              Web
-            </button>
-            <button
-              onClick={() => setLayout("mobile")}
-              className={`px-4 py-2 font-medium transition ${
-                layout === "mobile"
-                  ? "rounded-[4px] bg-[#1A1A1A08] text-black"
-                  : "bg-white"
-              }`}
-            >
-              Mobile
-            </button>
+        {/* Desktop / Tablet layout */}
+        <div className="hidden w-full items-center justify-between md:flex">
+          {/* Filter bar */}
+          <div className="flex items-center gap-[48px]">
+            {filters.map((filter) => (
+              <button
+                key={filter}
+                onClick={() => setActive(filter)}
+                className={`rounded-lg py-[10px] text-[14px] font-normal transition ${
+                  active === filter ? "bg-gray-100 text-black" : "text-gray-600"
+                }`}
+              >
+                {filter}
+              </button>
+            ))}
+          </div>
+
+          {/* Toggle Button */}
+          <div className="flex-shrink-0">
+            <div className="flex overflow-hidden rounded-[6px] border border-[#1A1A1A33]/60 p-1 text-sm font-normal">
+              <button
+                onClick={() => setLayout("web")}
+                className={`px-4 py-2 font-medium transition ${
+                  layout === "web"
+                    ? "rounded-[4px] bg-[#1A1A1A08] text-black"
+                    : "bg-white"
+                }`}
+              >
+                Web
+              </button>
+              <button
+                onClick={() => setLayout("mobile")}
+                className={`px-4 py-2 font-medium transition ${
+                  layout === "mobile"
+                    ? "rounded-[4px] bg-[#1A1A1A08] text-black"
+                    : "bg-white"
+                }`}
+              >
+                Mobile
+              </button>
+            </div>
           </div>
         </div>
       </div>
 
       {/* Show layout based on toggle */}
       {layout === "web" ? (
-        <div className="mx-auto mt-10 max-w-7xl px-6">
+        <div className="mt-6 md:mt-10">
           <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
             {cards.map((card) => (
-              <div key={card.id} className="relative rounded-lg bg-white">
+              <div key={card.id} className="relative rounded-lg">
                 {/* Image */}
                 <div className="w-full">
                   {card.img && (
@@ -158,18 +274,20 @@ export default function Home() {
                       alt={card.title}
                       width={499}
                       height={355}
-                      className="w-full rounded-t-lg object-cover px-[60px] py-[52px]"
+                      className="w-full rounded-t-lg object-cover md:px-[60px] md:py-[52px]"
                     />
                   )}
                 </div>
 
-                {/* Text section */}
-                <div className="p-4">
-                  <div className="font-barlow text-[14px] leading-[120%] font-medium">
-                    {card.title}
-                  </div>
-                  <div className="font-barlow mt-1 text-[12px] leading-[130%] font-normal tracking-[0.02em] text-gray-600">
-                    {card.text}
+                <div className="mt-[10px] flex items-center gap-[6px] text-left md:mt-4">
+                  <div className="flex h-16 w-16 flex-shrink-0 items-center justify-center rounded-full bg-gray-100"></div>
+                  <div className="flex-1">
+                    <div className="font-barlow text-[14px] leading-[120%] font-medium">
+                      {card.title}
+                    </div>
+                    <div className="font-barlow mt-1 text-[12px] leading-[130%] font-normal tracking-[0.02em] text-gray-600">
+                      {card.text}
+                    </div>
                   </div>
                 </div>
               </div>
@@ -190,17 +308,17 @@ export default function Home() {
                         <Image
                           src={card.img}
                           alt="Card Image"
-                          width={400}
-                          height={574}
-                          className="rounded-lg"
+                          width={343}
+                          height={348}
+                          className="md:h-[574px] md:w-[400px]"
                         />
                       </div>
                     )}
                   </div>
 
                   {/* Circle + Title + Description */}
-                  <div className="mt-4 flex items-center gap-4 text-left">
-                    <div className="flex h-16 w-16 items-center justify-center rounded-full bg-gray-100"></div>
+                  <div className="mt-[10px] flex items-center gap-[6px] text-left md:mt-4">
+                    <div className="flex h-16 w-16 flex-shrink-0 items-center justify-center rounded-full bg-gray-100"></div>
                     <div>
                       <div className="font-barlow align-middle text-[14px] leading-[120%] font-medium">
                         {card.title}

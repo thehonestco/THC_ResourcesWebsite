@@ -59,7 +59,6 @@ const Card = () => {
 
   const tools = [
     ["Figma", "Photoshop", "Freepik", "Illustrator", "LoadRunner", "Postman"],
-    ["Figma", "Photoshop", "Freepik", "Illustrator", "LoadRunner", "Postman"],
   ];
 
   return (
@@ -187,7 +186,7 @@ const Card = () => {
                 placeholder="Ask a question or start a post"
                 value={newComment}
                 onChange={(e) => setNewComment(e.target.value)}
-                className="w-full rounded-md border-[0.5px] border-[#1A1A1A33] p-4 text-sm focus:ring-2 focus:ring-black focus:outline-none"
+                className="w-full rounded-md border-[0.5px] border-[#1A1A1A33] p-4 text-[16px]"
               />
               <div className="mt-5 flex justify-end">
                 <button className="rounded-md bg-black p-[10px] font-normal text-white">
@@ -222,14 +221,29 @@ const Card = () => {
 
         <div className="h-fit rounded-[12px] border-[0.5px] border-gray-200 p-4">
           <h3 className="mb-4 text-[20px] font-medium">Tools</h3>
-          <div className="flex flex-col gap-6">
-            <h2 className="mb-4 text-[16px] font-normal opacity-60">Tools</h2>
+          <div className="flex flex-col">
+            <h2 className="mb-4 text-[16px] font-normal opacity-60">Design</h2>
             {tools.map((group, i) => (
-              <div key={i} className="flex flex-wrap gap-2">
+              <div key={i} className="flex flex-wrap gap-[12px]">
                 {group.map((tool) => (
                   <span
                     key={tool}
-                    className="rounded-full border border-gray-200 px-3 py-1 text-xs"
+                    className="mb-[12px] rounded-full border-[0.5px] border-gray-200 px-2 py-[6px] text-[14px] font-normal"
+                  >
+                    {tool}
+                  </span>
+                ))}
+              </div>
+            ))}
+          </div>
+          <div className="flex flex-col">
+            <h2 className="mb-4 text-[16px] font-normal opacity-60">Design</h2>
+            {tools.map((group, i) => (
+              <div key={i} className="flex flex-wrap gap-[12px]">
+                {group.map((tool) => (
+                  <span
+                    key={tool}
+                    className="mb-[12px] rounded-full border-[0.5px] border-gray-200 px-2 py-[6px] text-[14px] font-normal"
                   >
                     {tool}
                   </span>

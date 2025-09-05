@@ -1,6 +1,7 @@
 "use client";
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { useState } from "react";
 
 const cards = [
@@ -46,8 +47,8 @@ const Page = () => {
   const [active, setActive] = useState("");
   const [layout, setLayout] = useState("mobile");
   return (
-    <div className="mt-20 mb-20 w-full">
-      <div className="flex w-full justify-around gap-8 text-[16px]">
+    <div className="main-container w-full md:mt-20">
+      <div className="hidden w-full justify-between gap-8 text-[16px] md:flex">
         {/* Categories */}
         <div className="flex flex-col gap-6 p-2">
           <div className="font-normal text-[#332C2C]/60">Categories</div>
@@ -98,45 +99,110 @@ const Page = () => {
         </div>
       </div>
       {/* filter bar */}
-      <div className="mt-20 flex items-center justify-between px-20">
-        {/* filter bar */}
-        <div className="flex items-center gap-5">
-          {filters.map((filter) => (
-            <button
-              key={filter}
-              onClick={() => setActive(filter)}
-              className={`rounded-lg px-[14px] py-[10px] text-[14px] font-normal transition ${
-                active === filter ? "bg-gray-100 text-black" : "text-gray-600"
-              }`}
-            >
-              {filter}
-            </button>
-          ))}
+      <div className="mt-[30px] flex flex-col gap-5 md:mt-20 md:flex-row md:items-center md:justify-between">
+        <div className="flex w-full items-center md:hidden md:px-4">
+          {/* Toggle Button */}
+          <div className="flex-shrink-0">
+            <div className="flex gap-[5px] overflow-hidden rounded-[82px] border-[0.5px] border-[#1A1A1A33]/60 p-1 font-normal">
+              {/* Web Button */}
+              <button
+                onClick={() => setLayout("web")}
+                className={`flex items-center justify-center px-1 py-1 font-medium transition ${
+                  layout === "web"
+                    ? "rounded-[59px] bg-[#1A1A1A08] text-black"
+                    : "bg-white"
+                }`}
+              >
+                <Image
+                  src="/laptop-icon.png"
+                  alt="Web Icon"
+                  width={20}
+                  height={20}
+                />
+              </button>
+
+              {/* Mobile Button */}
+              <button
+                onClick={() => setLayout("mobile")}
+                className={`flex items-center justify-center px-1 py-1 font-medium transition ${
+                  layout === "mobile"
+                    ? "rounded-[59px] bg-[#1A1A1A08] text-black"
+                    : "bg-white"
+                }`}
+              >
+                <Image
+                  src="/mobile-icon.png"
+                  alt="Mobile Icon"
+                  width={20}
+                  height={20}
+                />
+              </button>
+            </div>
+          </div>
+
+          <div className="mr-[10px] ml-[15px] h-6 w-px flex-shrink-0 border-[0.5px] bg-gray-300"></div>
+
+          {/* Filter Bar */}
+          <div className="scrollbar-hide flex w-full flex-1 items-center overflow-x-auto">
+            <div className="flex gap-3">
+              {filters.map((filter) => (
+                <button
+                  key={filter}
+                  onClick={() => setActive(filter)}
+                  className={`rounded-lg px-[14px] py-[10px] text-[12px] font-normal whitespace-nowrap transition md:text-[14px] ${
+                    active === filter
+                      ? "bg-gray-100 text-black"
+                      : "text-gray-600"
+                  }`}
+                >
+                  {filter}
+                </button>
+              ))}
+            </div>
+          </div>
         </div>
 
-        {/* Toggle Button */}
-        <div className="flex">
-          <div className="flex overflow-hidden rounded-[6px] border border-[#1A1A1A33]/60 p-1 text-[14px] font-normal">
-            <button
-              onClick={() => setLayout("web")}
-              className={`px-4 py-2 font-medium transition ${
-                layout === "web"
-                  ? "rounded-[4px] bg-[#1A1A1A08] text-black"
-                  : "bg-white"
-              }`}
-            >
-              Web
-            </button>
-            <button
-              onClick={() => setLayout("mobile")}
-              className={`px-4 py-2 font-medium transition ${
-                layout === "mobile"
-                  ? "rounded-[4px] bg-[#1A1A1A08] text-black"
-                  : "bg-white"
-              }`}
-            >
-              Mobile
-            </button>
+        {/* Desktop / Tablet layout */}
+        <div className="hidden w-full items-center justify-between md:flex">
+          {/* Filter bar */}
+          <div className="flex items-center gap-[48px]">
+            {filters.map((filter) => (
+              <button
+                key={filter}
+                onClick={() => setActive(filter)}
+                className={`rounded-lg py-[10px] text-[14px] font-normal transition ${
+                  active === filter ? "bg-gray-100 text-black" : "text-gray-600"
+                }`}
+              >
+                {filter}
+              </button>
+            ))}
+          </div>
+
+          {/* Toggle Button */}
+          <div className="flex-shrink-0">
+            <div className="flex overflow-hidden rounded-[6px] border border-[#1A1A1A33]/60 p-1 text-sm font-normal">
+              <button
+                onClick={() => setLayout("web")}
+                className={`px-4 py-2 font-medium transition ${
+                  layout === "web"
+                    ? "rounded-[4px] bg-[#1A1A1A08] text-black"
+                    : "bg-white"
+                }`}
+              >
+                Web
+              </button>
+              <button
+                onClick={() => setLayout("mobile")}
+                className={`px-4 py-2 font-medium transition ${
+                  layout === "mobile"
+                    ? "rounded-[4px] bg-[#1A1A1A08] text-black"
+                    : "bg-white"
+                }`}
+              >
+                Mobile
+              </button>
+            </div>
           </div>
         </div>
       </div>
