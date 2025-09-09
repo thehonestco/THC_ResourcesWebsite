@@ -2,6 +2,50 @@
 import React from "react";
 import Link from "next/link";
 import { useState } from "react";
+import MenuGrid from "../../components/MenuGrid";
+
+const sections = [
+  {
+    title: "Categories",
+    links: [
+      { label: "AI and Machine Learning", href: "/article-detail" },
+      { label: "Product Development", href: "/article-detail" },
+      { label: "Shopping & Lifestyle", href: "/article-detail" },
+      { label: "Ecommerce", href: "/article-detail" },
+      { label: "Cloud and Infrastructure", href: "/article-detail" },
+    ],
+  },
+  {
+    title: "Screens",
+    links: [
+      { label: "Shopping & Lifestyle", href: "#" },
+      { label: "Product Development", href: "#" },
+      { label: "AI and Machine Learning", href: "#" },
+      { label: "Ecommerce", href: "#" },
+      { label: "Cloud and Infrastructure", href: "#" },
+    ],
+  },
+  {
+    title: "UI Elements",
+    links: [
+      { label: "Cloud and Infrastructure", href: "#" },
+      { label: "AI and Machine Learning", href: "#" },
+      { label: "Shopping & Lifestyle", href: "#" },
+      { label: "Product Development", href: "#" },
+      { label: "Ecommerce", href: "#" },
+    ],
+  },
+  {
+    title: "Components",
+    links: [
+      { label: "AI and Machine Learning", href: "#" },
+      { label: "Cloud and Infrastructure", href: "#" },
+      { label: "Shopping & Lifestyle", href: "#" },
+      { label: "Product Development", href: "#" },
+      { label: "Ecommerce", href: "#" },
+    ],
+  },
+];
 
 const cards = [
   {
@@ -46,65 +90,15 @@ const Page = () => {
   const [active, setActive] = useState("");
   return (
     <div className="main-container w-full md:mt-20">
-      {/* Sidebar Links */}
-      <div className="hidden w-full justify-between gap-8 text-[16px] md:flex">
-        {/* Categories */}
-        <div className="flex flex-col gap-6 p-2">
-          <div className="font-normal text-[#332C2C]/60">Categories</div>
-          <div className="flex flex-col gap-6 font-medium">
-            <Link href="/article-detail">Ecommerce</Link>
-            <Link href="/article-detail">AI and Machine Learning</Link>
-            <Link href="/article-detail">Shopping & Lifestyle</Link>
-            <Link href="/article-detail">Cloud and Infrastructure</Link>
-            <Link href="/article-detail">Product Development</Link>
-          </div>
-        </div>
-
-        {/* Screens */}
-        <div className="flex flex-col gap-6 p-2">
-          <div className="font-normal text-[#332C2C]/60">Screens</div>
-          <div className="flex flex-col gap-6 font-medium">
-            <Link href="#">Cloud and Infrastructure</Link>
-            <Link href="#">Shopping & Lifestyle</Link>
-            <Link href="#">Ecommerce</Link>
-            <Link href="#">AI and Machine Learning</Link>
-            <Link href="#">Product Development</Link>
-          </div>
-        </div>
-
-        {/* UI Elements */}
-        <div className="flex flex-col gap-6 p-2">
-          <div className="font-normal text-[#332C2C]/60">UI Elements</div>
-          <div className="flex flex-col gap-6 font-medium">
-            <Link href="#">Shopping & Lifestyle</Link>
-            <Link href="#">Product Development</Link>
-            <Link href="#">Shopping & Lifestyle</Link>
-            <Link href="#">Ecommerce</Link>
-            <Link href="#">AI and Machine Learning</Link>
-          </div>
-        </div>
-
-        {/* Components */}
-        <div className="flex flex-col gap-6 p-2">
-          <div className="font-normal text-[#332C2C]/60">Components</div>
-          <div className="flex flex-col gap-6 font-medium">
-            <Link href="#">Ecommerce</Link>
-            <Link href="#">AI and Machine Learning</Link>
-            <Link href="#">Shopping & Lifestyle</Link>
-            <Link href="#">Cloud and Infrastructure</Link>
-            <Link href="#">Product Development</Link>
-          </div>
-        </div>
-      </div>
-
+      <MenuGrid sections={sections} />
       {/* filter bar */}
-      <div className="scrollbar-hide mt-5 flex w-full flex-1 items-center overflow-x-auto">
-        <div className="flex gap-3">
+      <div className="scrollbar-hide mt-5 flex w-full flex-1 items-center overflow-x-auto md:mt-20">
+        <div className="flex gap-12">
           {filters.map((filter) => (
             <button
               key={filter}
               onClick={() => setActive(filter)}
-              className={`rounded-lg px-[14px] py-[10px] text-[12px] font-normal whitespace-nowrap transition md:text-[14px] ${
+              className={`rounded-lg px-[10px] py-[10px] text-[12px] font-normal whitespace-nowrap transition md:text-[14px] ${
                 active === filter ? "bg-gray-100 text-black" : "text-gray-600"
               }`}
             >

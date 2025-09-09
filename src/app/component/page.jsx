@@ -1,8 +1,51 @@
 "use client";
 import React from "react";
-import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
+import MenuGrid from "../../components/MenuGrid";
+
+const sections = [
+  {
+    title: "Categories",
+    links: [
+      { label: "AI and Machine Learning", href: "/components-detail" },
+      { label: "Product Development", href: "/components-detail" },
+      { label: "Shopping & Lifestyle", href: "/components-detail" },
+      { label: "Ecommerce", href: "/components-detail" },
+      { label: "Cloud and Infrastructure", href: "/components-detail" },
+    ],
+  },
+  {
+    title: "Screens",
+    links: [
+      { label: "Shopping & Lifestyle", href: "#" },
+      { label: "Product Development", href: "#" },
+      { label: "AI and Machine Learning", href: "#" },
+      { label: "Ecommerce", href: "#" },
+      { label: "Cloud and Infrastructure", href: "#" },
+    ],
+  },
+  {
+    title: "UI Elements",
+    links: [
+      { label: "Cloud and Infrastructure", href: "#" },
+      { label: "AI and Machine Learning", href: "#" },
+      { label: "Shopping & Lifestyle", href: "#" },
+      { label: "Product Development", href: "#" },
+      { label: "Ecommerce", href: "#" },
+    ],
+  },
+  {
+    title: "Components",
+    links: [
+      { label: "AI and Machine Learning", href: "#" },
+      { label: "Cloud and Infrastructure", href: "#" },
+      { label: "Shopping & Lifestyle", href: "#" },
+      { label: "Product Development", href: "#" },
+      { label: "Ecommerce", href: "#" },
+    ],
+  },
+];
 
 const cards = [
   {
@@ -48,56 +91,7 @@ const Page = () => {
   const [layout, setLayout] = useState("mobile");
   return (
     <div className="main-container w-full md:mt-20">
-      <div className="hidden w-full justify-between gap-8 text-[16px] md:flex">
-        {/* Categories */}
-        <div className="flex flex-col gap-6 p-2">
-          <div className="font-normal text-[#332C2C]/60">Categories</div>
-          <div className="flex flex-col gap-6 font-medium">
-            <Link href="/components-detail">AI and Machine Learning</Link>
-            <Link href="/components-detail">Product Development</Link>
-            <Link href="/components-detail">Shopping & Lifestyle</Link>
-            <Link href="/components-detail">Ecommerce</Link>
-            <Link href="/components-detail">Cloud and Infrastructure</Link>
-          </div>
-        </div>
-
-        {/* Screens */}
-        <div className="flex flex-col gap-6 p-2">
-          <div className="font-normal text-[#332C2C]/60">Screens</div>
-          <div className="flex flex-col gap-6 font-medium">
-            <Link href="#">Shopping & Lifestyle</Link>
-            <Link href="#">Product Development</Link>
-            <Link href="#">AI and Machine Learning</Link>
-            <Link href="#">Ecommerce</Link>
-
-            <Link href="#">Cloud and Infrastructure</Link>
-          </div>
-        </div>
-
-        {/* UI Elements */}
-        <div className="flex flex-col gap-6 p-2">
-          <div className="font-normal text-[#332C2C]/60">UI Elements</div>
-          <div className="flex flex-col gap-6 font-medium">
-            <Link href="#">Cloud and Infrastructure</Link>
-            <Link href="#">AI and Machine Learning</Link>
-            <Link href="#">Shopping & Lifestyle</Link>
-            <Link href="#">Product Development</Link>
-            <Link href="#">Ecommerce</Link>
-          </div>
-        </div>
-
-        {/* Components */}
-        <div className="flex flex-col gap-6 p-2">
-          <div className="font-normal text-[#332C2C]/60">Components</div>
-          <div className="flex flex-col gap-6 font-medium">
-            <Link href="#">AI and Machine Learning</Link>
-            <Link href="#">Cloud and Infrastructure</Link>
-            <Link href="#">Shopping & Lifestyle</Link>
-            <Link href="#">Product Development</Link>
-            <Link href="#">Ecommerce</Link>
-          </div>
-        </div>
-      </div>
+      <MenuGrid sections={sections} />
       {/* filter bar */}
       <div className="mt-[30px] flex flex-col gap-5 md:mt-20 md:flex-row md:items-center md:justify-between">
         <div className="flex w-full items-center md:hidden md:px-4">

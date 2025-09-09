@@ -45,22 +45,22 @@ const filters = ["Articles", "White Papers", "Case Studies", "Infographics"];
 const Page = () => {
   const [active, setActive] = useState("");
   return (
-    <div className="mt-20 mb-20 w-full">
+    <div className="main-container w-full md:mt-20">
       {/* filter bar */}
-      <div className="mt-20 ml-20 flex items-center justify-start gap-5">
-        {filters.map((filter) => (
-          <button
-            key={filter}
-            onClick={() => setActive(filter)}
-            className={`rounded-lg px-[14px] py-[10px] text-[14px] font-normal transition ${
-              active === filter
-                ? "bg-gray-100 text-black"
-                : "text-gray-600 hover:text-black"
-            }`}
-          >
-            {filter}
-          </button>
-        ))}
+      <div className="scrollbar-hide mt-5 flex w-full flex-1 items-center overflow-x-auto md:mt-20">
+        <div className="flex gap-[30px] md:gap-12">
+          {filters.map((filter) => (
+            <button
+              key={filter}
+              onClick={() => setActive(filter)}
+              className={`rounded-lg px-[10px] py-[10px] text-[12px] font-normal whitespace-nowrap transition md:text-[14px] ${
+                active === filter ? "bg-gray-100 text-black" : "text-gray-600"
+              }`}
+            >
+              {filter}
+            </button>
+          ))}
+        </div>
       </div>
 
       {/* Grid Section */}
