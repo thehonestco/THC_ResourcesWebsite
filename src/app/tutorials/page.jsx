@@ -99,7 +99,7 @@ const Page = () => {
             <button
               key={filter}
               onClick={() => setActive(filter)}
-              className={`rounded-lg py-[10px] text-[12px] font-normal whitespace-nowrap transition md:text-[14px] ${
+              className={`rounded-lg px-[10px] py-[8px] text-[12px] font-normal whitespace-nowrap transition md:text-[14px] ${
                 active === filter ? "bg-gray-100 text-black" : "text-gray-600"
               }`}
             >

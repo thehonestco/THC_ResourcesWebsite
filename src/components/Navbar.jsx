@@ -18,8 +18,7 @@ import { cn } from "../lib/utils";
 export default function Navbar() {
   const pathname = usePathname();
   const [query, setQuery] = useState("");
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false); // ✅ mobile menu state
-
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false); // ✅ State for mobile menu
   const links = [
     { href: "/", label: "Portfolio" },
     { href: "/tutorials", label: "Tutorials" },
@@ -80,56 +79,60 @@ export default function Navbar() {
           ))}
         </div>
 
-        {/* Search */}
-        <Dialog>
-          <div className="block md:hidden">
-            <DialogTrigger asChild>
-              <div className="cursor-pointer p-1">
-                <Image
-                  src="/search.png"
-                  alt="Search Icon"
-                  width={21}
-                  height={21}
-                />
-              </div>
-            </DialogTrigger>
-          </div>
-
-          <div className="hidden md:block">
-            <DialogTrigger asChild>
-              <div className="relative flex cursor-pointer">
-                <Input
-                  type="text"
-                  placeholder="Search.."
-                  className="w-full cursor-pointer rounded-[6px] border-[0.5px] border-[rgba(26,26,26,0.5)] py-2 pl-8 text-[14px] font-normal text-black placeholder-gray-400"
-                  readOnly
-                />
-                <div className="pointer-events-none absolute top-1/2 left-2 -translate-y-1/2 transform">
+        {/* Right Section: Search + Hamburger */}
+        <div className="flex items-center gap-4">
+          {/* Search */}
+          <Dialog>
+            {/* Mobile search icon */}
+            <div className="block md:hidden">
+              <DialogTrigger asChild>
+                <div className="cursor-pointer p-1">
                   <Image
                     src="/search.png"
                     alt="Search Icon"
-                    width={20}
-                    height={20}
+                    width={21}
+                    height={21}
                   />
                 </div>
-              </div>
-            </DialogTrigger>
-          </div>
+              </DialogTrigger>
+            </div>
 
-          <DialogContent
-            className={cn(
-              "rounded-2xl bg-white p-6 shadow-lg sm:max-w-4xl",
-              "data-[state=open]:animate-in data-[state=closed]:animate-out",
-              "duration-500 ease-in-out",
-              "data-[state=open]:slide-in-from-top-10 data-[state=closed]:slide-out-to-top-10",
-            )}
-          >
-            <DialogHeader>
-              <DialogTitle className="sr-only">Search</DialogTitle>
-            </DialogHeader>
+            {/* Desktop search input */}
+            <div className="hidden md:block">
+              <DialogTrigger asChild>
+                <div className="relative flex cursor-pointer">
+                  <Input
+                    id="navbar-search"
+                    name="search"
+                    type="text"
+                    placeholder="Search.."
+                    className="w-full cursor-pointer rounded-[6px] border-[0.5px] border-[rgba(26,26,26,0.5)] py-2 pl-8 text-[14px] font-normal text-black placeholder-gray-400"
+                    readOnly
+                  />
+                  <div className="pointer-events-none absolute top-1/2 left-2 -translate-y-1/2 transform">
+                    <Image
+                      src="/search.png"
+                      alt="Search Icon"
+                      width={20}
+                      height={20}
+                    />
+                  </div>
+                </div>
+              </DialogTrigger>
+            </div>
 
-            <div className="relative">
+            {/* Search Modal Content */}
+            <DialogContent
+              className={cn(
+                "rounded-2xl bg-white p-6 shadow-lg sm:max-w-4xl",
+                "data-[state=open]:animate-in data-[state=closed]:animate-out",
+                "duration-500 ease-in-out",
+                "data-[state=open]:slide-in-from-top-10 data-[state=closed]:slide-out-to-top-10",
+              )}
+            >
               <Input
+                id="modal-search"
+                name="search"
                 type="text"
                 placeholder="Search.."
                 value={query}
@@ -137,83 +140,17 @@ export default function Navbar() {
                 autoFocus
                 className="text-Primary/90 rounded-[8px] border-[0.5px] p-[10px] pr-3 pl-[60px] text-[18px]"
               />
-              <div className="pointer-events-none absolute top-1/2 left-[10px] -translate-y-1/2 transform font-normal">
-                <Image
-                  src="/search.png"
-                  alt="Search Icon"
-                  width={20}
-                  height={20}
-                />
-              </div>
-            </div>
+            </DialogContent>
+          </Dialog>
 
-            {/* Recent Searches */}
-            <div className="mt-6">
-              <h3 className="font-barlow mb-4 text-[14px] font-normal text-[#332C2C]/60">
-                Recent Searches
-              </h3>
-              <div className="flex items-center gap-4">
-                {recentSearches.map((item) => (
-                  <span
-                    key={item}
-                    className="font-barlow rounded-full bg-[#FBFBFB] px-3 py-2 text-[14px] text-gray-700"
-                  >
-                    {item}
-                  </span>
-                ))}
-              </div>
-            </div>
-
-            {/* Categories */}
-            <div className="mt-6">
-              <h3 className="font-barlow mb-4 text-[14px] font-normal text-[#332C2C]/60">
-                Categories
-              </h3>
-              <div className="flex flex-wrap gap-4">
-                {categories.map((cat) => (
-                  <div
-                    key={cat}
-                    className="flex flex-1 cursor-pointer items-center justify-center rounded-lg bg-[#FBFBFB] p-4 text-center text-[14px] font-medium text-gray-800 hover:bg-gray-100"
-                  >
-                    {cat}
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Latest Projects */}
-            <div className="mt-6">
-              <h3 className="font-barlow mb-4 text-[14px] font-normal text-[#332C2C]/60">
-                Latest Projects
-              </h3>
-              <div className="flex gap-4">
-                {projects.map((proj, i) => (
-                  <div key={i} className="flex-1">
-                    <div className="relative h-[100px] w-full overflow-hidden rounded-lg">
-                      <Image
-                        src={proj.image}
-                        alt={proj.title}
-                        fill
-                        className="object-cover"
-                      />
-                    </div>
-                    <p className="mt-2 text-center text-sm font-medium">
-                      {proj.title}
-                    </p>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </DialogContent>
-        </Dialog>
-
-        {/* Mobile Hamburger Button */}
-        <button
-          className="ml-4 md:hidden"
-          onClick={() => setMobileMenuOpen(true)}
-        >
-          <Menu size={24} />
-        </button>
+          {/* Mobile Hamburger Button */}
+          <button
+            className="px-1 py-[6px] md:hidden"
+            onClick={() => setMobileMenuOpen(true)}
+          >
+            <Menu size={24} />
+          </button>
+        </div>
       </div>
 
       {mobileMenuOpen && (
@@ -229,9 +166,9 @@ export default function Navbar() {
             </Link>
             <button
               onClick={() => setMobileMenuOpen(false)}
-              className="text-[16px] font-medium text-gray-600 hover:text-black"
+              className="text-[14px] font-normal"
             >
-              Close
+              close
             </button>
           </div>
 

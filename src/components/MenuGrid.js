@@ -7,8 +7,10 @@ export default function MenuGrid({ sections }) {
     <div className="hidden w-full justify-between gap-8 text-[16px] md:flex">
       {sections.map((section) => (
         <div key={section.title} className="flex flex-col gap-6">
-          <div className="font-normal text-[#332C2C]/60">{section.title}</div>
-          <div className="flex flex-col gap-6 font-medium">
+          <div className="text-[16px] font-normal text-[#332C2C]/60">
+            {section.title}
+          </div>
+          <div className="flex flex-col gap-6 text-[16px] font-medium">
             {section.links.map((link, i) => (
               <Link key={i} href={link.href}>
                 {link.label}

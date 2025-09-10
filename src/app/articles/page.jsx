@@ -93,7 +93,7 @@ const Page = () => {
       <MenuGrid sections={sections} />
       {/* filter bar */}
       <div className="scrollbar-hide mt-5 flex w-full flex-1 items-center overflow-x-auto md:mt-20">
-        <div className="flex gap-12">
+        <div className="flex gap-[30px] md:gap-12">
           {filters.map((filter) => (
             <button
               key={filter}

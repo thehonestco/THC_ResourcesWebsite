@@ -2,12 +2,12 @@ import "./globals.css";
 import Navbar from "../components/Navbar";
 import { Barlow } from "next/font/google";
 
-const barlow = Barlow({
+export const barlow = Barlow({
   subsets: ["latin"],
-  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
-  variable: "--font-barlow", // custom CSS variable
+  variable: "--font-barlow",
+  weight: ["300", "400", "500", "600", "700", "800", "900"],
+  display: "swap",
 });
-
 export const metadata = {
   title: "My App",
   description: "Using Barlow font everywhere",
