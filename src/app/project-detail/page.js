@@ -65,7 +65,7 @@ const Card = () => {
 
   return (
     <div className="main-container w-full md:mt-20">
-      <div className="mt-[66px] flex items-start gap-6">
+      <div className="mt-[66px] flex items-start gap-[30px]">
         {/* Left Circle */}
         <div className="h-[60px] w-[60px] rounded-full bg-[#F8F8F8] md:h-[120px] md:w-[120px]" />
 
@@ -75,7 +75,7 @@ const Card = () => {
             The Sarasva Capital
           </h2>
 
-          <p className="mt-2 text-[12px] font-normal text-gray-600 opacity-70 md:text-[14px]">
+          <p className="mt-[10px] text-[12px] font-normal tracking-[0.02em] text-gray-600 opacity-70 md:text-[14px]">
             We are a community of creators who make really cool things for new
             tech to help them succeed.
           </p>
@@ -182,7 +182,7 @@ const Card = () => {
         {cards.map((card) => (
           <div
             key={card.id}
-            className="flex flex-col items-center justify-center rounded-lg bg-white p-4"
+            className="flex flex-col items-center justify-center rounded-lg bg-[#FBFBFB] p-4"
           >
             <img
               src={card.img}

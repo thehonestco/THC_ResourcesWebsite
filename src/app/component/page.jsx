@@ -3,6 +3,7 @@ import React from "react";
 import Image from "next/image";
 import { useState } from "react";
 import MenuGrid from "../../components/MenuGrid";
+import { ThumbsUp, MessageSquare } from "lucide-react";
 
 const sections = [
   {
@@ -50,44 +51,63 @@ const sections = [
 const cards = [
   {
     id: 1,
-    img: "/sample.png",
-    title: "The Sarasva Capital",
-    text: "We are a community of creators who make really cool things for new tech to help them succeed.",
+    title: "Why Choose a Gold Loan?",
+    text: "Fast approvals, simple process, and secure transactions.",
+    img: "/sample-component1.png",
+    status: "Trending",
+    likes: 127,
+    comments: 34,
   },
   {
     id: 2,
-    img: "/sample2.png",
-    title: "The Sarasva Capital",
-    text: "We are a community of creators who make really cool things for new tech to help them succeed.",
+    title: "Why Choose Sarvasva Capital Gold Loan?",
+    text: "Fast approvals, simple process, and secure transactions.",
+    img: "/sample-component2.png",
+    status: "Trending",
+    likes: 85,
+    comments: 20,
   },
   {
     id: 3,
-    img: "/sample3.png",
-    title: "The Sarasva Capital",
-    text: "We are a community of creators who make really cool things for new tech to help them succeed.",
+    title: "Why Choose a Gold Loan?",
+    text: "Convenient process with lowest interest rates.",
+    img: "/sample-component3.png",
+    status: "Trending",
+    likes: 85,
+    comments: 20,
   },
   {
     id: 4,
+    title: "Why Choose a Gold Loan?",
+    text: "Quick loan against gold with minimal hassle.",
     img: "/sample.png",
-    title: "The Sarasva Capital",
-    text: "We are a community of creators who make really cool things for new tech to help them succeed.",
+    status: "Trending",
+    likes: 85,
+    comments: 20,
   },
   {
     id: 5,
+    title: "Why Choose Sarvasva Capital Gold Loan?",
+    text: "Fast approvals, simple process, and secure transactions.",
     img: "/sample.png",
-    title: "The Sarasva Capital",
-    text: "We are a community of creators who make really cool things for new tech to help them succeed.",
+    status: "Trending",
+    likes: 85,
+    comments: 20,
   },
   {
     id: 6,
+    title: "Why Choose a Gold Loan?",
+    text: "Convenient process with lowest interest rates.",
     img: "/sample.png",
-    title: "The Sarasva Capital",
-    text: "We are a community of creators who make really cool things for new tech to help them succeed.",
+    status: "Trending",
+    likes: 85,
+    comments: 20,
   },
 ];
+
 const filters = ["Articles", "White Papers", "Case Studies", "Infographics"];
 const Page = () => {
-  const [active, setActive] = useState("");
+  const [active, setActive] = useState("Articles");
   const [layout, setLayout] = useState("mobile");
   return (
     <div className="main-container w-full md:mt-20">
@@ -143,7 +163,7 @@ const Page = () => {
                 <button
                   key={filter}
                   onClick={() => setActive(filter)}
-                  className={`rounded-lg px-[14px] py-[10px] text-[12px] font-normal whitespace-nowrap transition md:text-[14px] ${
+                  className={`cursor-pointer rounded-lg px-[14px] py-[10px] text-[12px] font-normal whitespace-nowrap transition md:text-[14px] ${
                     active === filter
                       ? "bg-gray-100 text-black"
                       : "text-gray-600"
@@ -164,7 +184,7 @@ const Page = () => {
               <button
                 key={filter}
                 onClick={() => setActive(filter)}
-                className={`rounded-lg py-[10px] text-[14px] font-normal transition ${
+                className={`cursor-pointer rounded-lg px-[14px] py-[10px] text-[14px] font-normal transition ${
                   active === filter ? "bg-gray-100 text-black" : "text-gray-600"
                 }`}
               >
@@ -202,18 +222,36 @@ const Page = () => {
       </div>
 
       {/* Grid */}
-      <div className="mx-auto mt-10 w-full max-w-7xl">
+      <div className="mx-auto mt-10 w-full">
         <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-3">
           {cards.map((card) => (
             <div key={card.id} className="flex flex-col">
               {/* Card image */}
-              <div className="overflow-hidden rounded-[8px] border border-[#FBFBFB] bg-white">
+              <div className="aspect-square overflow-hidden rounded-[8px] bg-[#FBFBFB] p-4">
+                {/* Status + Like/Comment Row */}
+                <div className="mb-2 flex items-center justify-between">
+                  <span className="rounded-[4px] bg-[#1A1A1A1A]/10 px-[6px] py-1 text-[12px] font-normal">
+                    {card.status}
+                  </span>
+                  <div className="flex items-center gap-3 p-1 text-[10px]">
+                    <div className="flex items-center gap-1 rounded-[4px] bg-[#1A1A1A1A]/3 p-1">
+                      <ThumbsUp size={16} />
+                      {card.likes}
+                    </div>
+                    <div className="flex items-center gap-1 rounded-[4px] bg-[#1A1A1A1A]/3 p-1">
+                      <MessageSquare size={16} />
+                      {card.comments}
+                    </div>
+                  </div>
+                </div>
                 {card.img && (
-                  <img
-                    src={card.img}
-                    alt={card.title}
-                    className="h-[400px] max-h-full w-[400px] max-w-full object-cover"
-                  />
+                  <div className="flex h-full w-full items-center justify-center">
+                    <img
+                      src={card.img}
+                      alt={card.title}
+                      className="max-h-full max-w-full object-cover"
+                    />
+                  </div>
                 )}
               </div>
               <div className="mt-3 px-1">

@@ -9,8 +9,9 @@ export const barlow = Barlow({
   display: "swap",
 });
 export const metadata = {
-  title: "My App",
-  description: "Using Barlow font everywhere",
+  title: "THE HONEST RESOURCES",
+  description:
+    "The Honest Resources – a curated hub of design, dev, and creative resources.",
 };
 
 export default function RootLayout({ children }) {

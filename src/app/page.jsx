@@ -3,6 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
 import MenuGrid from "../components/MenuGrid";
+import { ThumbsUp, MessageSquare } from "lucide-react";
 
 const sections = [
   {
@@ -51,45 +52,69 @@ const cards = [
   {
     id: 1,
     title: "Why Choose a Gold Loan?",
-    text: "Fast approvals, simple process, and secure transactions. ",
-    img: "/sample.png",
+    text: "Fast approvals, simple process, and secure transactions.",
+    webImg: "/websample.png",
+    mobileImg: "/sample.png",
+    status: "Trending",
+    likes: 127,
+    comments: 34,
   },
   {
     id: 2,
     title: "Why Choose Sarvasva Capital Gold Loan?",
     text: "Fast approvals, simple process, and secure transactions.",
-    img: "/sample.png",
+    webImg: "/websample.png",
+    mobileImg: "/sample.png",
+    status: "Trending",
+    likes: 85,
+    comments: 20,
   },
   {
     id: 3,
     title: "Why Choose a Gold Loan?",
     text: "Convenient process with lowest interest rates.",
-    img: "/sample.png",
+    webImg: "/websample.png",
+    mobileImg: "/sample.png",
+    status: "Trending",
+    likes: 85,
+    comments: 20,
   },
   {
     id: 4,
     title: "Why Choose a Gold Loan?",
     text: "Quick loan against gold with minimal hassle.",
-    img: "/sample.png",
+    webImg: "/websample.png",
+    mobileImg: "/sample.png",
+    status: "Trending",
+    likes: 85,
+    comments: 20,
   },
   {
     id: 5,
     title: "Why Choose Sarvasva Capital Gold Loan?",
     text: "Fast approvals, simple process, and secure transactions.",
-    img: "/sample.png",
+    webImg: "/websample.png",
+    mobileImg: "/sample.png",
+    status: "Trending",
+    likes: 85,
+    comments: 20,
   },
   {
     id: 6,
     title: "Why Choose a Gold Loan?",
     text: "Convenient process with lowest interest rates.",
-    img: "/sample.png",
+    webImg: "/websample.png",
+    mobileImg: "/sample.png",
+    status: "Trending",
+    likes: 85,
+    comments: 20,
   },
 ];
 
 const filters = ["Articles", "White Papers", "Case Studies", "Most Viewed"];
 
 export default function Home() {
-  const [active, setActive] = useState("");
+  const [active, setActive] = useState("Articles");
   const [layout, setLayout] = useState("mobile");
   const [open, setOpen] = useState(false);
   const [selected, setSelected] = useState("Portfolio"); // default label
@@ -156,7 +181,7 @@ export default function Home() {
               {/* Web Button */}
               <button
                 onClick={() => setLayout("web")}
-                className={`flex items-center justify-center px-1 py-1 font-medium transition ${
+                className={`flex cursor-pointer items-center justify-center px-1 py-1 font-medium transition ${
                   layout === "web"
                     ? "rounded-[59px] bg-[#1A1A1A08] text-black"
                     : "bg-white"
@@ -198,7 +223,7 @@ export default function Home() {
                 <button
                   key={filter}
                   onClick={() => setActive(filter)}
-                  className={`rounded-lg px-[14px] py-[10px] text-[12px] font-normal whitespace-nowrap transition md:text-[14px] ${
+                  className={`cursor-pointer rounded-lg px-[14px] py-[10px] text-[12px] font-normal whitespace-nowrap transition md:text-[14px] ${
                     active === filter
                       ? "bg-gray-100 text-black"
                       : "text-gray-600"
@@ -219,7 +244,7 @@ export default function Home() {
               <button
                 key={filter}
                 onClick={() => setActive(filter)}
-                className={`rounded-lg py-[10px] text-[14px] font-normal transition ${
+                className={`cursor-pointer rounded-lg px-[14px] py-[10px] text-[14px] font-normal transition ${
                   active === filter ? "bg-gray-100 text-black" : "text-gray-600"
                 }`}
               >
@@ -259,14 +284,30 @@ export default function Home() {
       {/* Show layout based on toggle */}
       {layout === "web" ? (
         <div className="mt-6 md:mt-10">
-          <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
+          <div className="grid grid-cols-1 gap-10 lg:grid-cols-2">
             {cards.map((card) => (
               <div key={card.id} className="relative rounded-lg">
                 {/* Image */}
-                <div className="w-full">
-                  {card.img && (
+                <div className="w-full rounded-[8px] bg-[#FBFBFB]">
+                  {/* Status + Like/Comment Row */}
+                  <div className="flex items-center justify-between p-4">
+                    <span className="rounded-[4px] bg-[#1A1A1A1A]/10 px-[6px] py-1 text-[12px] font-normal">
+                      {card.status}
+                    </span>
+                    <div className="flex items-center gap-3 p-1 text-[10px]">
+                      <div className="flex items-center gap-1 rounded-[4px] bg-[#1A1A1A1A]/3 p-1">
+                        <ThumbsUp size={16} />
+                        {card.likes}
+                      </div>
+                      <div className="flex items-center gap-1 rounded-[4px] bg-[#1A1A1A1A]/3 p-1">
+                        <MessageSquare size={16} />
+                        {card.comments}
+                      </div>
+                    </div>
+                  </div>
+                  {card.webImg && (
                     <Image
-                      src={card.img}
+                      src={card.webImg}
                       alt={card.title}
                       width={499}
                       height={355}
@@ -293,16 +334,32 @@ export default function Home() {
       ) : (
         <>
           {/* Grid Mobile*/}
-          <div className="mx-auto mt-10 max-w-7xl">
+          <div className="mx-auto mt-10 w-full">
             <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-3">
               {cards.map((card) => (
                 <div key={card.id} className="flex flex-col items-center">
                   {/* Card with Image */}
                   <div className="w-full rounded-lg bg-[#FBFBFB] p-4">
-                    {card.img && (
+                    {/* Status + Like/Comment Row */}
+                    <div className="mb-2 flex items-center justify-between">
+                      <span className="rounded-[4px] bg-[#1A1A1A1A]/10 px-[6px] py-1 text-[12px] font-normal">
+                        {card.status}
+                      </span>
+                      <div className="flex items-center gap-3 p-1 text-[10px]">
+                        <div className="flex items-center gap-1 rounded-[4px] bg-[#1A1A1A1A]/3 p-1">
+                          <ThumbsUp size={16} />
+                          {card.likes}
+                        </div>
+                        <div className="flex items-center gap-1 rounded-[4px] bg-[#1A1A1A1A]/3 p-1">
+                          <MessageSquare size={16} />
+                          {card.comments}
+                        </div>
+                      </div>
+                    </div>
+                    {card.mobileImg && (
                       <div className="flex justify-center">
                         <Image
-                          src={card.img}
+                          src={card.mobileImg}
                           alt="Card Image"
                           width={343}
                           height={348}
