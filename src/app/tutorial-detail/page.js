@@ -64,7 +64,7 @@ const Page = () => {
       </div>
 
       {/* Grid Section */}
-      <div className="mx-auto mt-10 w-full px-4">
+      <div className="mx-auto mt-10 mb-[100px] w-full">
         <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-3">
           {cards.map((card) => (
             <div

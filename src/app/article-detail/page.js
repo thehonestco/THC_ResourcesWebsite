@@ -6,7 +6,7 @@ import { useState } from "react";
 const cards = [
   {
     id: 1,
-    img: "/sample.png",
+    img: "/sample-article.png",
     title: "The Sarasva Capital",
     text: "We are a community of creators who make really cool things for new tech to help them succeed.",
   },
@@ -64,7 +64,7 @@ const Page = () => {
       </div>
 
       {/* Grid Section */}
-      <div className="mx-auto mt-10 w-full">
+      <div className="mx-auto mt-10 mb-[100px] w-full">
         <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-3">
           {cards.map((card) => (
             <div key={card.id} className="flex flex-col">

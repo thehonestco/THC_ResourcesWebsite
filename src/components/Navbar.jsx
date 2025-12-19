@@ -80,6 +80,7 @@ export default function Navbar() {
         </div>
 
         {/* Right Section: Search + Hamburger */}
+
         <div className="flex items-center gap-4">
           {/* Search */}
           <Dialog>
@@ -106,8 +107,8 @@ export default function Navbar() {
                     name="search"
                     type="text"
                     placeholder="Search.."
-                    className="w-full cursor-pointer rounded-[6px] border-[0.5px] border-[rgba(26,26,26,0.5)] py-2 pl-8 text-[14px] font-normal text-black placeholder-gray-400"
                     readOnly
+                    className="w-[285px] cursor-pointer rounded-[6px] border-[0.5px] border-[rgba(26,26,26,0.5)] py-2 pl-8 text-[14px] font-normal text-black placeholder-gray-400"
                   />
                   <div className="pointer-events-none absolute top-1/2 left-2 -translate-y-1/2 transform">
                     <Image
@@ -121,25 +122,129 @@ export default function Navbar() {
               </DialogTrigger>
             </div>
 
-            {/* Search Modal Content */}
             <DialogContent
               className={cn(
-                "rounded-2xl bg-white p-6 shadow-lg sm:max-w-4xl",
+                "max-h-[600px] overflow-hidden overflow-y-auto rounded-2xl bg-white p-6 md:max-w-[900px]",
                 "data-[state=open]:animate-in data-[state=closed]:animate-out",
-                "duration-500 ease-in-out",
                 "data-[state=open]:slide-in-from-top-10 data-[state=closed]:slide-out-to-top-10",
+                "duration-500 ease-in-out",
               )}
             >
-              <Input
-                id="modal-search"
-                name="search"
-                type="text"
-                placeholder="Search.."
-                value={query}
-                onChange={(e) => setQuery(e.target.value)}
-                autoFocus
-                className="text-Primary/90 rounded-[8px] border-[0.5px] p-[10px] pr-3 pl-[60px] text-[18px]"
-              />
+              {/* ✅ Accessible only */}
+              <DialogHeader className="sr-only">
+                <DialogTitle>Search</DialogTitle>
+              </DialogHeader>
+
+              {/* SEARCH INPUT */}
+              <div className="relative">
+                <span className="pointer-events-none absolute top-1/2 left-4 -translate-y-1/2 text-[#1A1A1A]/90">
+                  <Image src="/search.png" alt="" width={20} height={20} />
+                </span>
+                <Input
+                  id="modal-search"
+                  name="search"
+                  type="text"
+                  placeholder="Search"
+                  value={query}
+                  onChange={(e) => setQuery(e.target.value)}
+                  autoFocus
+                  className="h-[52px] rounded-[10px] border-[0.5px] border-[#1A1A1A]/80 pr-4 pl-12 text-[18px] font-normal text-[#1A1A1A]/90"
+                />
+              </div>
+
+              {/* RECENT SEARCHES */}
+              <div className="">
+                <p className="mb-4 text-[14px] font-normal text-[#332C2C] opacity-60">
+                  Recent Searches
+                </p>
+                <div className="flex flex-wrap gap-4">
+                  {[
+                    "Sarvasva Capital",
+                    "Web Design",
+                    "Dashboard UI",
+                    "Ecommerce",
+                  ].map((item) => (
+                    <button
+                      key={item}
+                      className="rounded-[57px] bg-[#FBFBFB] px-3 py-2 text-[14px] text-[#1A1A1A] hover:bg-[#1A1A1A]/10"
+                    >
+                      {item}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {/* CATEGORIES */}
+              <div className="">
+                <p className="mb-4 text-[14px] font-normal text-[#332C2C] opacity-60">
+                  Categories
+                </p>
+                <div className="grid grid-cols-2 gap-4 md:grid-cols-6">
+                  {[
+                    "E-Commerce",
+                    "Finance",
+                    "Education",
+                    "SAAS",
+                    "Travelling",
+                    "Real Estate",
+                  ].map((cat) => (
+                    <div
+                      key={cat}
+                      className="flex h-[110px] justify-start rounded-xl bg-[#FBFBFB] p-3 text-[14px] font-medium hover:bg-gray-100"
+                    >
+                      {cat}
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* LATEST PROJECTS */}
+              <div className="">
+                <p className="mb-4 text-[14px] font-normal text-[#332C2C] opacity-60">
+                  Latest Projects
+                </p>
+                <div className="grid grid-cols-2 gap-5 md:grid-cols-5">
+                  {[1, 2, 3, 4, 5].map((i) => (
+                    <div key={i} className="space-y-[7px]">
+                      <div className="relative aspect-[154/111] w-full overflow-hidden rounded-[8px] bg-[#FBFBFB]">
+                        <Image
+                          src="/websample.png"
+                          alt=""
+                          fill
+                          className="object-contain"
+                        />
+                      </div>
+                      <p className="text-[14px] font-medium text-[#1A1A1A]">
+                        Sarvasva Capital
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* UI Projects */}
+              <div className="">
+                <p className="mb-4 text-[14px] font-normal text-[#332C2C] opacity-60">
+                  Ui Elememts
+                </p>
+                <div className="grid grid-cols-2 gap-5 md:grid-cols-5">
+                  {[1, 2, 3, 4, 5].map((i) => (
+                    <div key={i} className="space-y-[7px]">
+                      <div className="relative aspect-[154/111] w-full overflow-hidden rounded-[8px] bg-[#FBFBFB]">
+                        <Image
+                          src="/sample.png"
+                          alt=""
+                          fill
+                          className="object-contain"
+                        />
+                      </div>
+                      <p className="text-[14px] font-medium text-[#1A1A1A]">
+                        Ui Elements
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              </div>
             </DialogContent>
           </Dialog>
 

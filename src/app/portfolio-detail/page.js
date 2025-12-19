@@ -1,4 +1,5 @@
 "use client";
+import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
 import { ThumbsUp, MessageSquare } from "lucide-react";
@@ -184,59 +185,11 @@ export default function Home() {
 
       {/* Show layout based on toggle */}
       {layout === "web" ? (
-        <div className="mx-auto mt-10 w-full">
+        <div className="mt-6 md:mt-10">
           <div className="grid grid-cols-1 gap-10 lg:grid-cols-2">
             {cards.map((card) => (
-              <div key={card.id} className="relative rounded-lg">
-                {/* Image */}
-                <div className="w-full rounded-[8px] bg-[#FBFBFB]">
-                  {/* Status + Like/Comment Row */}
-                  <div className="flex items-center justify-between p-4">
-                    <span className="rounded-[4px] bg-[#1A1A1A1A]/10 px-[6px] py-1 text-[12px] font-normal">
-                      {card.status}
-                    </span>
-                    <div className="flex items-center gap-3 p-1 text-[10px]">
-                      <div className="flex items-center gap-1 rounded-[4px] bg-[#1A1A1A1A]/3 p-1">
-                        <ThumbsUp size={16} />
-                        {card.likes}
-                      </div>
-                      <div className="flex items-center gap-1 rounded-[4px] bg-[#1A1A1A1A]/3 p-1">
-                        <MessageSquare size={16} />
-                        {card.comments}
-                      </div>
-                    </div>
-                  </div>
-                  {card.webImg && (
-                    <Image
-                      src={card.webImg}
-                      alt={card.title}
-                      width={499}
-                      height={355}
-                      className="w-full rounded-t-lg object-cover md:px-[60px] md:py-[52px]"
-                    />
-                  )}
-                </div>
-
-                {/* Text section */}
-                <div className="p-4">
-                  <div className="font-barlow text-[14px] leading-[120%] font-medium">
-                    {card.title}
-                  </div>
-                  <div className="font-barlow mt-1 text-[12px] leading-[130%] font-normal tracking-[0.02em] text-gray-600">
-                    {card.text}
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      ) : (
-        <>
-          {/* Grid Mobile*/}
-          <div className="mx-auto mt-10 mb-20 w-full">
-            <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-3">
-              {cards.map((card) => (
-                <div key={card.id} className="flex flex-col items-center">
+              <Link key={card.id} href="/project-detail" className="block">
+                <div className="flex cursor-pointer flex-col items-center">
                   {/* Card with Image */}
                   <div className="w-full rounded-lg bg-[#FBFBFB] p-4">
                     {/* Status + Like/Comment Row */}
@@ -255,32 +208,97 @@ export default function Home() {
                         </div>
                       </div>
                     </div>
-                    {card.mobileImg && (
+                    {card.webImg && (
                       <div className="flex justify-center">
                         <Image
-                          src={card.mobileImg}
+                          src={card.webImg}
                           alt="Card Image"
-                          width={343}
-                          height={348}
-                          className="md:h-[574px] md:w-[400px]"
+                          className="h-auto w-full rounded-[8px] object-contain"
                         />
                       </div>
                     )}
                   </div>
 
                   {/* Circle + Title + Description */}
-                  <div className="mt-4 flex items-center gap-4 text-left">
-                    <div className="flex h-16 w-16 items-center justify-center rounded-full bg-gray-100"></div>
-                    <div>
-                      <div className="font-barlow align-middle text-[14px] leading-[120%] font-medium">
-                        {card.title}
-                      </div>
-                      <div className="font-barlow text-[12px] leading-[130%] font-normal tracking-[0.02em] text-gray-600">
-                        {card.text}
+                  <div className="mt-[10px] w-full text-left md:mt-4">
+                    <div className="flex items-center gap-[6px]">
+                      {/* Circle */}
+                      <div className="flex h-16 w-16 flex-shrink-0 items-center justify-center rounded-full bg-gray-100"></div>
+
+                      {/* Title + Description */}
+                      <div>
+                        <div className="font-barlow text-[14px] leading-[120%] font-medium">
+                          {card.title}
+                        </div>
+                        <div className="font-barlow text-[12px] leading-[130%] font-normal tracking-[0.02em] text-gray-600">
+                          {card.text}
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+      ) : (
+        <>
+          {/* Grid Mobile*/}
+          <div className="mx-auto mt-10 w-full">
+            <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-3">
+              {cards.map((card) => (
+                <Link key={card.id} href="/project-detail" className="block">
+                  <div className="flex cursor-pointer flex-col items-center">
+                    {/* Card with Image */}
+                    <div className="w-full rounded-lg bg-[#FBFBFB] p-4">
+                      {/* Status + Like/Comment Row */}
+                      <div className="mb-2 flex items-center justify-between">
+                        <span className="rounded-[4px] bg-[#1A1A1A1A]/10 px-[6px] py-1 text-[12px] font-normal">
+                          {card.status}
+                        </span>
+                        <div className="flex items-center gap-3 p-1 text-[10px]">
+                          <div className="flex items-center gap-1 rounded-[4px] bg-[#1A1A1A1A]/3 p-1">
+                            <ThumbsUp size={16} />
+                            {card.likes}
+                          </div>
+                          <div className="flex items-center gap-1 rounded-[4px] bg-[#1A1A1A1A]/3 p-1">
+                            <MessageSquare size={16} />
+                            {card.comments}
+                          </div>
+                        </div>
+                      </div>
+                      {card.mobileImg && (
+                        <div className="flex justify-center">
+                          <Image
+                            src={card.mobileImg}
+                            alt="Card Image"
+                            width={343}
+                            height={348}
+                            className="md:h-[574px] md:w-[400px]"
+                          />
+                        </div>
+                      )}
+                    </div>
+
+                    {/* Circle + Title + Description */}
+                    <div className="mt-[10px] w-full text-left md:mt-4">
+                      <div className="flex items-center gap-[6px]">
+                        {/* Circle */}
+                        <div className="flex h-16 w-16 flex-shrink-0 items-center justify-center rounded-full bg-gray-100"></div>
+
+                        {/* Title + Description */}
+                        <div>
+                          <div className="font-barlow text-[14px] leading-[120%] font-medium">
+                            {card.title}
+                          </div>
+                          <div className="font-barlow text-[12px] leading-[130%] font-normal tracking-[0.02em] text-gray-600">
+                            {card.text}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </Link>
               ))}
             </div>
           </div>

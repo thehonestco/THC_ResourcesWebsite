@@ -3,6 +3,12 @@ import React from "react";
 import Link from "next/link";
 import { useState } from "react";
 import MenuGrid from "../../components/MenuGrid";
+import {
+  DropdownMenu,
+  DropdownMenuTrigger,
+  DropdownMenuContent,
+  DropdownMenuItem,
+} from "../../components/ui/dropdown-menu";
 
 const sections = [
   {
@@ -92,25 +98,59 @@ const Page = () => {
   return (
     <div className="main-container w-full md:mt-20">
       <MenuGrid sections={sections} />
-      {/* filter bar */}
-      <div className="scrollbar-hide mt-5 flex w-full flex-1 items-center overflow-x-auto md:mt-20">
-        <div className="flex gap-[30px] md:gap-12">
-          {filters.map((filter) => (
-            <button
-              key={filter}
-              onClick={() => setActive(filter)}
-              className={`cursor-pointer rounded-lg px-[14px] py-[10px] text-[12px] font-normal whitespace-nowrap transition md:text-[14px] ${
-                active === filter ? "bg-gray-100 text-black" : "text-gray-600"
-              }`}
-            >
-              {filter}
-            </button>
-          ))}
+      <div className="mt-[30px] flex flex-col gap-5 md:mt-20 md:flex-row md:items-center md:justify-between">
+        <div className="flex w-full items-center">
+          <div className="flex items-center gap-4">
+            {/* Filter Bar */}
+            <div className="scrollbar-hide flex w-full flex-1 items-center overflow-x-auto">
+              <div className="flex gap-[20px]">
+                {filters.map((filter) => (
+                  <button
+                    key={filter}
+                    onClick={() => setActive(filter)}
+                    className={`cursor-pointer rounded-lg px-[10px] py-[8px] text-[12px] font-normal whitespace-nowrap transition md:text-[14px] ${
+                      active === filter
+                        ? "bg-[#FBFBFB] text-black"
+                        : "text-black"
+                    }`}
+                  >
+                    {filter}
+                  </button>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="hidden w-full items-center justify-end md:flex">
+          <div className="flex items-center gap-4">
+            {/* SORT BY DROPDOWN */}
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <button className="flex items-center rounded-[6px] border border-[#1A1A1A33]/60 px-4 py-[12px] text-[14px] font-normal transition hover:bg-[#1A1A1A08] md:block">
+                  Sort by
+                  <span className="ml-[6px] text-[14px]">▾</span>
+                </button>
+              </DropdownMenuTrigger>
+
+              <DropdownMenuContent align="start" className="w-40">
+                <DropdownMenuItem onClick={() => console.log("Latest")}>
+                  Latest
+                </DropdownMenuItem>
+                <DropdownMenuItem onClick={() => console.log("Most Popular")}>
+                  Most Popular
+                </DropdownMenuItem>
+                <DropdownMenuItem onClick={() => console.log("Oldest")}>
+                  Oldest
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </div>
         </div>
       </div>
 
       {/* Grid Section */}
-      <div className="mx-auto mt-10 w-full">
+      <div className="mx-auto mt-10 mb-[100px] w-full">
         <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-3">
           {cards.map((card) => (
             <div
