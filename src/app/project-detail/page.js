@@ -14,6 +14,7 @@ import {
   DrawerTrigger,
   DrawerClose,
 } from "../../components/ui/drawer";
+import { DrawerTitle, DrawerDescription } from "../../components/ui/drawer";
 
 const filters = ["Screens", "UI Elements", "Flows", "Code Snippets"];
 const cards = [
@@ -275,50 +276,59 @@ const Card = () => {
               </DrawerTrigger>
 
               {/* Drawer Popup */}
-              <DrawerContent className="h-[100vh] rounded-t-2xl">
+              <DrawerContent className="rounded-t-2xl">
+                {/* Screen-reader only accessibility elements */}
+                <DrawerTitle className="sr-only">
+                  Image preview drawer
+                </DrawerTitle>
+
+                <DrawerDescription className="sr-only">
+                  Preview image with options to copy or download.
+                </DrawerDescription>
+
                 {activeCard && (
                   <div className="flex h-full flex-col px-4 pt-4">
-                    {/* Header (NO large padding-bottom) */}
-                    <div className="flex items-center gap-5 pb-4">
+                    {/* Header */}
+                    <div className="flex items-center gap-5 pb-[87px]">
                       <div className="h-[50px] w-[50px] rounded-full bg-[#F8F8F8]" />
                       <h3 className="text-base font-semibold">
                         {activeCard.title ?? "The Sarvasva Capital"}
                       </h3>
                     </div>
 
-                    {/* Scrollable middle content */}
-                    <div className="flex min-h-0 flex-1 flex-col">
-                      {/* Image Preview */}
-                      <div className="flex flex-1 items-center justify-center bg-[#FBFBFB] p-4">
-                        <div className="relative aspect-[1/1] w-full max-w-[320px]">
-                          <Image
-                            src={activeCard.img}
-                            alt="Preview"
-                            fill
-                            className="object-contain"
-                          />
-                        </div>
-                      </div>
-
-                      {/* Pagination dots */}
-                      <div className="mt-[10px] flex justify-center gap-2">
-                        {[1, 2, 3, 4, 5].map((_, i) => (
-                          <span
-                            key={i}
-                            className="h-[5px] w-[5px] rounded-full bg-[#1A1A1A]/30"
-                          />
-                        ))}
+                    {/* Image Preview */}
+                    <div className="flex flex-1 items-center justify-center bg-[#FBFBFB]">
+                      {/* Background box */}
+                      <div className="flex h-[348px] w-[343px] items-center justify-center rounded-[12px] bg-white">
+                        {/* Image */}
+                        <Image
+                          src={activeCard.img}
+                          alt="Preview"
+                          width={220} // smaller than container
+                          height={220}
+                          className="object-contain"
+                        />
                       </div>
                     </div>
 
-                    {/* Actions (fixed at bottom, always visible) */}
-                    <div className="mt-4 flex items-center justify-between">
-                      <button className="text-sm font-medium">Copy</button>
+                    {/* Pagination dots (optional) */}
+                    <div className="mt-[10px] flex justify-center gap-2">
+                      {[1, 2, 3, 4, 5].map((_, i) => (
+                        <span
+                          key={i}
+                          className="h-[5px] w-[5px] rounded-full bg-[#1A1A1A]/30"
+                        />
+                      ))}
+                    </div>
+
+                    {/* Actions */}
+                    <div className="mt-[115px] mb-10 flex items-center justify-center gap-10">
+                      <button className="text-[16px] font-medium">Copy</button>
 
                       <a
                         href={activeCard.img}
                         download
-                        className="flex items-center gap-2 rounded-lg bg-black px-4 py-2 text-sm text-white"
+                        className="flex items-center gap-2 rounded-lg bg-black px-4 py-2 text-[16px] font-medium text-white"
                       >
                         Download
                         <span>⬇</span>
