@@ -4,7 +4,6 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
-import { Menu, X } from "lucide-react"; // ✅ Hamburger + Close icons
 import {
   Dialog,
   DialogContent,
@@ -14,9 +13,22 @@ import {
 } from "./ui/dialog";
 import { Input } from "./ui/input";
 import { cn } from "../lib/utils";
+import {
+  Sheet,
+  SheetContent,
+  SheetTrigger,
+  SheetClose,
+} from ".././components/ui/sheet";
+import {
+  Accordion,
+  AccordionItem,
+  AccordionTrigger,
+  AccordionContent,
+} from ".././components/ui/accordion";
 
 export default function Navbar() {
   const pathname = usePathname();
+  const [open, setOpen] = useState(false);
   const [query, setQuery] = useState("");
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false); // ✅ State for mobile menu
   const links = [
@@ -81,23 +93,20 @@ export default function Navbar() {
 
         {/* Right Section: Search + Hamburger */}
 
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-[14px]">
+          {/* Mobile search icon */}
+          <Link href="/search" className="block md:hidden">
+            <div className="cursor-pointer p-1">
+              <Image
+                src="/search.png"
+                alt="Search Icon"
+                width={21}
+                height={21}
+              />
+            </div>
+          </Link>
           {/* Search */}
           <Dialog>
-            {/* Mobile search icon */}
-            <div className="block md:hidden">
-              <DialogTrigger asChild>
-                <div className="cursor-pointer p-1">
-                  <Image
-                    src="/search.png"
-                    alt="Search Icon"
-                    width={21}
-                    height={21}
-                  />
-                </div>
-              </DialogTrigger>
-            </div>
-
             {/* Desktop search input */}
             <div className="hidden md:block">
               <DialogTrigger asChild>
@@ -108,7 +117,7 @@ export default function Navbar() {
                     type="text"
                     placeholder="Search.."
                     readOnly
-                    className="w-[285px] cursor-pointer rounded-[6px] border-[0.5px] border-[rgba(26,26,26,0.5)] py-2 pl-8 text-[14px] font-normal text-black placeholder-gray-400"
+                    className="w-[285px] cursor-pointer rounded-[6px] border-[1px] border-[rgba(26,26,26,0.5)] py-2 pl-8 text-[14px] font-normal text-black placeholder-gray-400"
                   />
                   <div className="pointer-events-none absolute top-1/2 left-2 -translate-y-1/2 transform">
                     <Image
@@ -247,18 +256,132 @@ export default function Navbar() {
               </div>
             </DialogContent>
           </Dialog>
-
           {/* Mobile Hamburger Button */}
-          <button
-            className="px-1 py-[6px] md:hidden"
-            onClick={() => setMobileMenuOpen(true)}
-          >
-            <Menu size={24} />
-          </button>
+          <div className="md:hidden">
+            <Sheet open={open} onOpenChange={setOpen}>
+              {/* Hamburger Button */}
+              <SheetTrigger asChild>
+                <button className="px-1 py-[6px]">
+                  <div className="cursor-pointer p-1">
+                    <Image
+                      src="/icon/navbar-icon.png"
+                      alt="Menu"
+                      width={24}
+                      height={24}
+                    />
+                  </div>
+                </button>
+              </SheetTrigger>
+
+              {/* Full Screen Sheet */}
+              <SheetContent
+                side="right"
+                className="h-full w-full p-0 [&>button]:hidden"
+              >
+                <div className="flex h-full flex-col px-6 py-8">
+                  <div className="flex items-center justify-between">
+                    <Link
+                      href="/"
+                      className="flex items-center gap-[5.5px] text-[15.62px] md:gap-x-2 md:text-[22.5px]"
+                    >
+                      <span className="font-extrabold">THE</span>
+                      <span className="font-medium">HONEST</span>
+                      <span className="font-light">RESOURCES</span>
+                    </Link>
+
+                    {/* Text Close Button */}
+                    <SheetClose asChild>
+                      <button className="text-[14px] font-normal text-black">
+                        Close
+                      </button>
+                    </SheetClose>
+                  </div>
+                  {/* Divider */}
+                  <div
+                    className="mt-[16px] h-[1px] w-full opacity-50"
+                    style={{
+                      background:
+                        "linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(0,0,0,0.6) 6.73%, rgba(0,0,0,0.6) 92.79%, rgba(255,255,255,0) 100%)",
+                    }}
+                  ></div>
+
+                  {/* Menu Items */}
+                  <nav className="mt-[44px] flex flex-col gap-4 text-[16px]">
+                    {/* Normal item */}
+                    <SheetClose asChild>
+                      <button className="py-[16px] text-left leading-[1.3] font-normal tracking-[0.05em] text-[#1A1A1A]/60">
+                        Categories
+                      </button>
+                    </SheetClose>
+                    {/* Accordion: Services */}
+                    <Accordion type="single" collapsible>
+                      <AccordionItem value="screens" className="border-none">
+                        <AccordionTrigger className="py-[16px] text-left leading-[1.3] font-normal tracking-[0.05em] text-[#1A1A1A]/60">
+                          Screens
+                        </AccordionTrigger>
+
+                        <AccordionContent className="pl-4">
+                          <SheetClose asChild>
+                            <button className="block py-2 text-left text-[16px]">
+                              UI/UX Design
+                            </button>
+                          </SheetClose>
+                          <SheetClose asChild>
+                            <button className="block py-2 text-left text-[16px]">
+                              Web Development
+                            </button>
+                          </SheetClose>
+                          <SheetClose asChild>
+                            <button className="block py-2 text-left text-[16px]">
+                              Mobile Apps
+                            </button>
+                          </SheetClose>
+                        </AccordionContent>
+                      </AccordionItem>
+                    </Accordion>
+
+                    {/* Accordion: Projects */}
+                    <Accordion type="single" collapsible>
+                      <AccordionItem value="projects" className="border-none">
+                        <AccordionTrigger className="py-[16px] text-left leading-[1.3] font-normal tracking-[0.05em] text-[#1A1A1A]/60">
+                          UI Elements
+                        </AccordionTrigger>
+
+                        <AccordionContent className="pl-4">
+                          <SheetClose asChild>
+                            <button className="block py-2 text-left text-[16px]">
+                              Web Projects
+                            </button>
+                          </SheetClose>
+                          <SheetClose asChild>
+                            <button className="block py-2 text-left text-[16px]">
+                              Mobile Projects
+                            </button>
+                          </SheetClose>
+                          <SheetClose asChild>
+                            <button className="block py-2 text-left text-[16px]">
+                              Case Studies
+                            </button>
+                          </SheetClose>
+                        </AccordionContent>
+                      </AccordionItem>
+                    </Accordion>
+
+                    {/* Normal item */}
+                    <SheetClose asChild>
+                      <button className="py-[16px] text-left leading-[1.3] font-normal tracking-[0.05em] text-[#1A1A1A]/60">
+                        Components
+                      </button>
+                    </SheetClose>
+                  </nav>
+                </div>
+              </SheetContent>
+            </Sheet>
+          </div>
         </div>
       </div>
 
-      {mobileMenuOpen && (
+      {/* {mobileMenuOpen && (
         <div className="fixed inset-0 z-50 flex flex-col bg-white p-4">
           <div className="flex items-center justify-between">
             <Link
@@ -293,7 +416,7 @@ export default function Navbar() {
             ))}
           </div>
         </div>
-      )}
+      )} */}
 
       {/* Divider */}
       <div

@@ -18,7 +18,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" className={`${barlow.variable}`}>
       <body className="font-barlow">
-        <Navbar />
+        {/* <Navbar /> */}
         {children}
       </body>
     </html>
