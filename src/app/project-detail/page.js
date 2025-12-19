@@ -33,7 +33,8 @@ const Card = () => {
     if (currentPage < totalPages) setCurrentPage(currentPage + 1);
   };
 
-  const [active, setActive] = useState("");
+  const filters = ["Screens", "UI Elements", "Flows", "Code Snippets"];
+  const [active, setActive] = useState("Screens");
   const [newComment, setNewComment] = useState("");
   const [open, setOpen] = useState(false);
   const [selected, setSelected] = useState("Sort by");
