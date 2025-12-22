@@ -68,7 +68,6 @@ export default function Navbar() {
           href="/"
           className="flex items-center gap-[5.5px] text-[15.62px] md:gap-x-2 md:text-[22.5px]"
         >
-          <span className="font-extrabold">THE</span>
           <span className="font-medium">HONEST</span>
           <span className="font-light">RESOURCES</span>
         </Link>
@@ -284,7 +283,6 @@ export default function Navbar() {
                       href="/"
                       className="flex items-center gap-[5.5px] text-[15.62px] md:gap-x-2 md:text-[22.5px]"
                     >
-                      <span className="font-extrabold">THE</span>
                       <span className="font-medium">HONEST</span>
                       <span className="font-light">RESOURCES</span>
                     </Link>
@@ -308,19 +306,50 @@ export default function Navbar() {
                   {/* Menu Items */}
                   <nav className="mt-[44px] flex flex-col gap-4 text-[16px]">
                     {/* Normal item */}
-                    <SheetClose asChild>
-                      <button className="py-[16px] text-left leading-[1.3] font-normal tracking-[0.05em] text-[#1A1A1A]/60">
-                        Categories
-                      </button>
-                    </SheetClose>
+                    <Accordion type="single" collapsible>
+                      <AccordionItem value="screens" className="border-none">
+                        <AccordionTrigger className="py-[14px] text-left text-[16px] leading-[1.3] font-normal tracking-[0.05em] text-[#1A1A1A]/60">
+                          Categories
+                        </AccordionTrigger>
+
+                        <AccordionContent className="pl-3">
+                          <SheetClose asChild>
+                            <button className="block py-[10px] text-left text-[16px]">
+                              Ecommerce
+                            </button>
+                          </SheetClose>
+                          <SheetClose asChild>
+                            <button className="block py-2 text-left text-[16px]">
+                              AI and Machine Learning
+                            </button>
+                          </SheetClose>
+                          <SheetClose asChild>
+                            <button className="block py-2 text-left text-[16px]">
+                              Shopping & Lifestyle
+                            </button>
+                          </SheetClose>
+                          <SheetClose asChild>
+                            <button className="block py-2 text-left text-[16px]">
+                              Cloud and Infrastructure
+                            </button>
+                          </SheetClose>
+                          <SheetClose asChild>
+                            <button className="block py-2 text-left text-[16px]">
+                              Product Development
+                            </button>
+                          </SheetClose>
+                        </AccordionContent>
+                      </AccordionItem>
+                    </Accordion>
+
                     {/* Accordion: Services */}
                     <Accordion type="single" collapsible>
                       <AccordionItem value="screens" className="border-none">
-                        <AccordionTrigger className="py-[16px] text-left leading-[1.3] font-normal tracking-[0.05em] text-[#1A1A1A]/60">
+                        <AccordionTrigger className="py-[14px] text-left text-[16px] leading-[1.3] font-normal tracking-[0.05em] text-[#1A1A1A]/60">
                           Screens
                         </AccordionTrigger>
 
-                        <AccordionContent className="pl-4">
+                        <AccordionContent className="pl-3">
                           <SheetClose asChild>
                             <button className="block py-2 text-left text-[16px]">
                               UI/UX Design
@@ -343,11 +372,11 @@ export default function Navbar() {
                     {/* Accordion: Projects */}
                     <Accordion type="single" collapsible>
                       <AccordionItem value="projects" className="border-none">
-                        <AccordionTrigger className="py-[16px] text-left leading-[1.3] font-normal tracking-[0.05em] text-[#1A1A1A]/60">
+                        <AccordionTrigger className="py-[14px] text-left text-[16px] leading-[1.3] font-normal tracking-[0.05em] text-[#1A1A1A]/60">
                           UI Elements
                         </AccordionTrigger>
 
-                        <AccordionContent className="pl-4">
+                        <AccordionContent className="pl-3">
                           <SheetClose asChild>
                             <button className="block py-2 text-left text-[16px]">
                               Web Projects
@@ -369,7 +398,7 @@ export default function Navbar() {
 
                     {/* Normal item */}
                     <SheetClose asChild>
-                      <button className="py-[16px] text-left leading-[1.3] font-normal tracking-[0.05em] text-[#1A1A1A]/60">
+                      <button className="py-[14px] text-left text-[16px] leading-[1.3] font-normal tracking-[0.05em] text-[#1A1A1A]/60">
                         Components
                       </button>
                     </SheetClose>
