@@ -1,0 +1,125 @@
+// export default function DynamicPage({ params }) {
+//   const { section, item, page } = params;
+
+//   const sectionTitle = section.replace(/-/g, " ");
+//   const itemTitle = item.replace(/-/g, " ");
+//   const pageTitle = page.replace(/-/g, " ");
+
+//   return (
+//     <div className="main-container section-padding">
+//       <h1 className="text-3xl font-bold capitalize">{pageTitle}</h1>
+
+//       <p className="mt-2 text-gray-600 capitalize">Section: {sectionTitle}</p>
+
+//       <p className="mt-1 text-gray-600 capitalize">Item: {itemTitle}</p>
+
+//       {/*
+//         Switch rendering based on `page`
+//       */}
+//       {page === "portfolio-detail" && <div>Portfolio UI</div>}
+//       {page === "case-study" && <div>Case Study UI</div>}
+//       {page === "project-detail" && <div>Project Detail UI</div>}
+//     </div>
+//   );
+// }
+"use client";
+import Navbar from "../../../../components/Navbar";
+import React from "react";
+import { useState } from "react";
+
+const cards = [
+  {
+    id: 1,
+    img: "/sample.png",
+    title: "The Sarasva Capital",
+    text: "We are a community of creators who make really cool things for new tech to help them succeed.",
+  },
+  {
+    id: 2,
+    img: "/sample2.png",
+    title: "The Sarasva Capital",
+    text: "We are a community of creators who make really cool things for new tech to help them succeed.",
+  },
+  {
+    id: 3,
+    img: "/sample3.png",
+    title: "The Sarasva Capital",
+    text: "We are a community of creators who make really cool things for new tech to help them succeed.",
+  },
+  {
+    id: 4,
+    img: "/sample3.png",
+    title: "The Sarasva Capital",
+    text: "We are a community of creators who make really cool things for new tech to help them succeed.",
+  },
+  {
+    id: 5,
+    img: "/sample2.png",
+    title: "The Sarasva Capital",
+    text: "We are a community of creators who make really cool things for new tech to help them succeed.",
+  },
+  {
+    id: 6,
+    img: "/sample.png",
+    title: "The Sarasva Capital",
+    text: "We are a community of creators who make really cool things for new tech to help them succeed.",
+  },
+];
+const filters = ["Articles", "White Papers", "Case Studies", "Infographics"];
+
+const Page = () => {
+  const [active, setActive] = useState("Articles");
+  return (
+    <>
+      <Navbar />
+      <div className="main-container w-full md:mt-20">
+        {/* filter bar */}
+        <div className="scrollbar-hide mt-5 flex w-full flex-1 items-center overflow-x-auto md:mt-20">
+          <div className="flex gap-[30px] md:gap-12">
+            {filters.map((filter) => (
+              <button
+                key={filter}
+                onClick={() => setActive(filter)}
+                className={`cursor-pointer rounded-lg px-[14px] py-[10px] text-[12px] font-normal whitespace-nowrap transition md:text-[14px] ${
+                  active === filter ? "bg-gray-100 text-black" : "text-gray-600"
+                }`}
+              >
+                {filter}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {/* Grid Section */}
+        <div className="mx-auto mt-10 mb-[100px] w-full">
+          <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-3">
+            {cards.map((card) => (
+              <div
+                key={card.id}
+                className="overflow-hidden rounded-[8px] border-[0.5px] border-gray-200 bg-white p-3 duration-200"
+              >
+                {card.img && (
+                  <img
+                    src={card.img}
+                    alt={card.title}
+                    className="h-56 w-full rounded-[6px] object-cover"
+                  />
+                )}
+                <div className="md:mt-[10px]">
+                  <h3 className="text-[14px] font-medium text-[#1A1A1A]">
+                    {card.title}
+                  </h3>
+                  <p className="mt-1 text-[12px] tracking-[0.02em] text-black opacity-70">
+                    {card.text}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </>
+  );
+};
+
+export default Page;

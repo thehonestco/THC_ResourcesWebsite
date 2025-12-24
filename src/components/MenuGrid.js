@@ -2,23 +2,47 @@
 "use client";
 import Link from "next/link";
 
-export default function MenuGrid({ sections }) {
+const slugify = (text) =>
+  text
+    .toLowerCase()
+    .trim()
+    .replace(/&/g, "and")
+    .replace(/\s+/g, "-")
+    .replace(/[^\w-]+/g, "");
+
+export default function MenuGrid({ sections, page }) {
+  console.log("Sections:", sections);
   return (
     <div className="hidden w-full justify-between gap-8 text-[16px] md:flex">
-      {sections.map((section) => (
-        <div key={section.title} className="flex flex-col gap-6">
-          <div className="text-[16px] font-normal text-[#332C2C]/60">
-            {section.title}
+      {sections.map((section) => {
+        const sectionSlug = slugify(section.title);
+        console.log("Section Slug:", sectionSlug);
+
+        return (
+          <div key={section.title} className="flex flex-col gap-6">
+            <div className="text-[16px] font-normal text-[#332C2C]/60">
+              {section.title}
+            </div>
+
+            <div className="flex flex-col gap-6 text-[16px] font-medium">
+              {section.links.map((link, i) => {
+                const itemSlug = slugify(link.label);
+
+                return (
+                  <Link
+                    key={i}
+                    href={`/${page}/${sectionSlug}/${itemSlug}`}
+                    // href={link?.href}
+                    className="hover:underline"
+                  >
+                    {link.label}
+                  </Link>
+                );
+              })}
+            </div>
           </div>
-          <div className="flex flex-col gap-6 text-[16px] font-medium">
-            {section.links.map((link, i) => (
-              <Link key={i} href={link.href}>
-                {link.label}
-              </Link>
-            ))}
-          </div>
-        </div>
-      ))}
+        );
+      })}
     </div>
   );
 }

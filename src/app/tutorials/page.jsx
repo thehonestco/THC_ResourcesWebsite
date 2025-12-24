@@ -15,11 +15,14 @@ const sections = [
   {
     title: "Categories",
     links: [
-      { label: "AI and Machine Learning", href: "/tutorial-detail" },
+      {
+        label: "Cloud and Infrastructure",
+        href: "/tutorials/categories/udayan",
+      },
       { label: "Product Development", href: "/tutorial-detail" },
       { label: "Shopping & Lifestyle", href: "/tutorial-detail" },
       { label: "Ecommerce", href: "/tutorial-detail" },
-      { label: "Cloud and Infrastructure", href: "/tutorial-detail" },
+      { label: "Infrastructure", href: "/tutorial-detail" },
     ],
   },
   {
@@ -100,7 +103,7 @@ const Page = () => {
     <>
       <Navbar />
       <div className="main-container w-full md:mt-20">
-        <MenuGrid sections={sections} />
+        <MenuGrid sections={sections} page="tutorials" />
         <div className="mt-[30px] flex flex-col gap-5 md:mt-20 md:flex-row md:items-center md:justify-between">
           <div className="flex w-full items-center">
             <div className="flex items-center gap-4">

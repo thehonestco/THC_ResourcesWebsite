@@ -2,57 +2,14 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
-import MenuGrid from "../components/MenuGrid";
+import { ThumbsUp, MessageSquare } from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuTrigger,
   DropdownMenuContent,
   DropdownMenuItem,
-} from "../components/ui/dropdown-menu";
-import Navbar from "../components/Navbar";
-
-const sections = [
-  {
-    title: "Categories",
-    links: [
-      { label: "AI and Machine Learning", href: "/portfolio-detail" },
-      { label: "Product Development", href: "/portfolio-detail" },
-      { label: "Shopping & Lifestyle", href: "/portfolio-detail" },
-      { label: "Ecommerce", href: "/portfolio-detail" },
-      { label: "Cloud and Infrastructure", href: "/portfolio-detail" },
-    ],
-  },
-  {
-    title: "Screens",
-    links: [
-      { label: "Shopping & Lifestyle", href: "#" },
-      { label: "Product Development", href: "#" },
-      { label: "AI and Machine Learning", href: "#" },
-      { label: "Ecommerce", href: "#" },
-      { label: "Cloud and Infrastructure", href: "#" },
-    ],
-  },
-  {
-    title: "UI Elements",
-    links: [
-      { label: "Cloud and Infrastructure", href: "#" },
-      { label: "AI and Machine Learning", href: "#" },
-      { label: "Shopping & Lifestyle", href: "#" },
-      { label: "Product Development", href: "#" },
-      { label: "Ecommerce", href: "#" },
-    ],
-  },
-  {
-    title: "Components",
-    links: [
-      { label: "AI and Machine Learning", href: "#" },
-      { label: "Cloud and Infrastructure", href: "#" },
-      { label: "Shopping & Lifestyle", href: "#" },
-      { label: "Product Development", href: "#" },
-      { label: "Ecommerce", href: "#" },
-    ],
-  },
-];
+} from "../../../../components/ui/dropdown-menu";
+import Navbar from "../../../../components/Navbar";
 
 const cards = [
   {
@@ -117,111 +74,21 @@ const cards = [
   },
 ];
 
-const filters = ["Articles", "White Papers", "Case Studies", "Most Viewed"];
+const filters = ["Articles", "White Papers", "Case Studies", "Infographics"];
 
 export default function Home() {
   const [active, setActive] = useState("Articles");
   const [layout, setLayout] = useState("mobile");
-  const [open, setOpen] = useState(false);
-  const [selected, setSelected] = useState("Portfolio"); // default label
-
-  const handleSelect = (name) => {
-    setSelected(name);
-    setOpen(false);
-  };
 
   return (
     <>
       <Navbar />
       <div className="main-container w-full md:mt-20">
-        {/* Categories + Sections */}
-        <MenuGrid sections={sections} page="portfolio" />
-
-        <div className="relative mt-[24px] block md:hidden">
-          {/* Button with current selection */}
-          <button
-            onClick={() => setOpen(!open)}
-            className="w-auto bg-white text-[16px] font-medium"
-          >
-            {selected} ▾
-          </button>
-
-          {/* Dropdown menu */}
-          {open && (
-            <div className="absolute mt-2 w-[160px] rounded-md border border-gray-200 bg-white shadow-md">
-              <Link
-                href="/"
-                className="block px-3 py-2 hover:bg-gray-100"
-                onClick={() => handleSelect("Portfolio")}
-              >
-                Portfolio
-              </Link>
-              <Link
-                href="/tutorials"
-                className="block px-3 py-2 hover:bg-gray-100"
-                onClick={() => handleSelect("Tutorials")}
-              >
-                Tutorials
-              </Link>
-              <Link
-                href="/articles"
-                className="block px-3 py-2 hover:bg-gray-100"
-                onClick={() => handleSelect("Articles")}
-              >
-                Articles
-              </Link>
-              <Link
-                href="/component"
-                className="block px-3 py-2 hover:bg-gray-100"
-                onClick={() => handleSelect("Components")}
-              >
-                Components
-              </Link>
-            </div>
-          )}
-        </div>
-
         <div className="mt-[30px] flex flex-col gap-5 md:mt-20 md:flex-row md:items-center md:justify-between">
           <div className="flex w-full items-center">
-            {/* Toggle */}
-            <div className="flex-shrink-0 md:hidden">
-              <div className="flex gap-[6px] overflow-hidden rounded-[82px] border-[0.5px] border-[#1A1A1A33] p-1">
-                <button
-                  onClick={() => setLayout("web")}
-                  className={`rounded-[59px] p-1 transition ${
-                    layout === "web" ? "bg-[#1A1A1A]/3" : ""
-                  }`}
-                >
-                  <Image
-                    src="/icon/laptop-icon.png"
-                    alt="Web layout"
-                    width={28}
-                    height={28}
-                  />
-                </button>
-
-                <button
-                  onClick={() => setLayout("mobile")}
-                  className={`rounded-[59px] p-1 transition ${
-                    layout === "mobile" ? "bg-[#1A1A1A]/3" : ""
-                  }`}
-                >
-                  <Image
-                    src="/icon/mobile-icon.png"
-                    alt="Mobile layout"
-                    width={28}
-                    height={28}
-                  />
-                </button>
-              </div>
-            </div>
-
-            {/* Divider */}
-            <div className="mx-[15px] h-6 w-[0.5px] bg-[#1A1A1A]/20 md:hidden" />
-
-            {/* Filter Bar */}
-            <div className="flex min-w-0 flex-1 items-center">
-              <div className="scrollbar-hide flex w-full items-center overflow-x-auto">
+            <div className="flex items-center gap-4">
+              {/* Filter Bar */}
+              <div className="scrollbar-hide flex w-full flex-1 items-center overflow-x-auto">
                 <div className="flex gap-[20px]">
                   {filters.map((filter) => (
                     <button
@@ -305,7 +172,7 @@ export default function Home() {
                     <div className="w-full rounded-lg bg-[#FBFBFB] p-4">
                       {/* Status + Like/Comment Row */}
                       <div className="mb-2 flex items-center justify-between">
-                        <span className="rounded-[4px] bg-[#1A1A1A1A] px-[6px] py-1 text-[12px] font-normal">
+                        <span className="rounded-[4px] bg-[#1A1A1A1A]/10 px-[6px] py-1 text-[12px] font-normal">
                           {card.status}
                         </span>
                         <div className="flex items-center gap-3 p-1 text-[10px]">
@@ -332,13 +199,15 @@ export default function Home() {
                         </div>
                       </div>
                       {card.webImg && (
-                        <div className="relative aspect-[343/254] w-full md:aspect-[620/458]">
-                          <Image
-                            src={card.webImg}
-                            alt="Card Image"
-                            fill
-                            className="rounded-[8px] object-contain"
-                          />
+                        <div className="flex justify-center">
+                          <div className="relative aspect-[620/458] w-[400px]">
+                            <Image
+                              src={card.webImg}
+                              alt="Card Image"
+                              fill
+                              className="rounded-[8px] object-contain"
+                            />
+                          </div>
                         </div>
                       )}
                     </div>
@@ -354,7 +223,7 @@ export default function Home() {
                           <div className="font-barlow text-[14px] leading-[120%] font-medium">
                             {card.title}
                           </div>
-                          <div className="font-barlow mt-1 text-[12px] leading-[130%] font-normal tracking-[0.02em] text-black opacity-70">
+                          <div className="font-barlow text-[12px] leading-[130%] font-normal tracking-[0.02em] text-black opacity-70">
                             {card.text}
                           </div>
                         </div>
@@ -377,7 +246,7 @@ export default function Home() {
                       <div className="w-full rounded-lg bg-[#FBFBFB] p-4">
                         {/* Status + Like/Comment Row */}
                         <div className="mb-2 flex items-center justify-between">
-                          <span className="rounded-[4px] bg-[#1A1A1A]/10 px-[6px] py-1 text-[12px] font-normal">
+                          <span className="rounded-[4px] bg-[#1A1A1A1A]/10 px-[6px] py-1 text-[12px] font-normal">
                             {card.status}
                           </span>
                           <div className="flex items-center gap-3 p-1 text-[10px]">
@@ -427,7 +296,7 @@ export default function Home() {
                             <div className="font-barlow text-[14px] leading-[120%] font-medium">
                               {card.title}
                             </div>
-                            <div className="font-barlow mt-1 text-[12px] leading-[130%] font-normal tracking-[0.02em] text-black opacity-70">
+                            <div className="font-barlow text-[12px] leading-[130%] font-normal tracking-[0.02em] text-black">
                               {card.text}
                             </div>
                           </div>

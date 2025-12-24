@@ -99,7 +99,7 @@ const Page = () => {
     <>
       <Navbar />
       <div className="main-container w-full md:mt-20">
-        <MenuGrid sections={sections} />
+        <MenuGrid sections={sections} page="articles" />
         <div className="mt-[30px] flex flex-col gap-5 md:mt-20 md:flex-row md:items-center md:justify-between">
           <div className="flex w-full items-center">
             <div className="flex items-center gap-4">
